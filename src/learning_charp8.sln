@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter_07_03", "chapter_07
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter_07_04", "chapter_07\chapter_07_04\chapter_07_04.csproj", "{B6787087-792C-454F-A711-A8E3C3395624}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chapter_07", "chapter_07", "{64724281-05CF-4E44-B6F0-ED6347B8803A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48B18562-6FCD-4206-90E3-41D1306277EF} = {64724281-05CF-4E44-B6F0-ED6347B8803A}
+		{CC1B00FF-632F-4266-88E1-410B316F1D66} = {64724281-05CF-4E44-B6F0-ED6347B8803A}
+		{E3ACCFB6-D7EE-4081-A551-7A2C1396D102} = {64724281-05CF-4E44-B6F0-ED6347B8803A}
+		{B6787087-792C-454F-A711-A8E3C3395624} = {64724281-05CF-4E44-B6F0-ED6347B8803A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C2A078BD-046F-40DD-858E-CFCF14F3926D}
