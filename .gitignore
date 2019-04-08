@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/.vs/learning_charp8
+/src/chapter_07/chapter_07_01/obj
+/src/chapter_07/chapter_07_01/bin/Debug/netcoreapp2.1
+/src/chapter_07/chapter_07_02/obj
+/src/chapter_07/chapter_07_02/bin/Debug/netcoreapp2.1
+/src/chapter_07/chapter_07_03/obj
+/src/chapter_07/chapter_07_03/bin/Debug/netcoreapp2.1
+/src/chapter_07/chapter_07_04/obj
+/src/chapter_07/chapter_07_04/bin/Debug/netcoreapp2.1
