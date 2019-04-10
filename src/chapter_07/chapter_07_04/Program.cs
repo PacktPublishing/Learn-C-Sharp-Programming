@@ -20,21 +20,21 @@ namespace chapter_07_04
          }
 
          {
-            var text = "M270 Turbo 1.6l 75kW";
-            var match = Regex.Match(text, @"\d+kW");
+            var text = "2019-12-25";
+            var match = Regex.Match(text, @"^(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)$");
             Console.WriteLine(match.Value);
          }
 
          {
-            var text = "M270 Turbo 1.6l 75kW";
-            var regex = new Regex(@"\d+kW");
+            var text = "2019-12-25";
+            var regex = new Regex(@"^(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)$");
             var match = regex.Match(text);
             Console.WriteLine(match.Value);
          }
 
          {
-            var text = "M270 Turbo 1.6l 75kW, 90kW, 115kW";
-            var matches = Regex.Matches(text, @"\d+kW");
+            var text = "2019-05-01,2019-5-9,2019-12-25,2019-13-21";
+            var matches = Regex.Matches(text, @"(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)");
             foreach(Match match in matches)
                Console.WriteLine(match);
             for (int i = 0; i < matches.Count; ++i)
@@ -44,8 +44,8 @@ namespace chapter_07_04
          }
 
          {
-            var text = "M270 Turbo 1.6l 75kW, 90kW, 115kW";
-            var matches = Regex.Matches(text, @"(\d+)kW");
+            var text = "2019-05-01,2019-5-9,2019-12-25,2019-13-21";
+            var matches = Regex.Matches(text, @"(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)");
             foreach (Match match in matches)
                Console.WriteLine(match.Groups[1].Value);
             for (int i = 0; i < matches.Count; ++i)
@@ -55,26 +55,32 @@ namespace chapter_07_04
          }
 
          {
-            var text = "M270 DE20LA 2.0l 160kW\nM274 DE16LA 2.0l 135kW\nM271 KE18ML 1.8l 90kW";
-            var matches = Regex.Matches(text, @"^(M\d+) ([A-Z]+\d+[A-Z]{2}) (\d.\d)l (\d+)kW$", RegexOptions.Multiline);
+            var text = "2019-05-01\n2019-5-9\n2019-12-25\n2019-13-21";
+            var matches = Regex.Matches(text, @"^(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)$", RegexOptions.Multiline);
             foreach(Match match in matches)
             {
-               Console.WriteLine($"{match.Groups[1]} {match.Groups[4]}");
+               Console.WriteLine($"{ match.Groups[1]} {match.Groups[4]}");
             }
          }
 
          {
-            var text = "M270 DE20LA 2.0l 160kW\nM274 DE16LA 2.0l 135kW\nM271 KE18ML 1.8l 90kW";
+            var text = "2019-05-01\n2019-5-9\n2019-12-25\n2019-13-21";
             var matches = Regex.Matches(
-               text, 
-               @"^(M\d+) ([A-Z]+\d+[A-Z]{2}) (\d.\d)l (\d+)kW$", 
+               text,
+               @"^(\d{4})-(1[0-2]|0[1-9]|[0-9]?)-(3[01]|[12][0-9]|0[1-9]|[0-9]?)$", 
                RegexOptions.Multiline, 
                TimeSpan.FromMilliseconds(1));
 
             foreach (Match match in matches)
             {
-               Console.WriteLine($"{match.Groups[1]} {match.Groups[4]}");
+               Console.WriteLine($"{match.Groups[1]}-{match.Groups[2]}-{match.Groups[3]}");
             }
+         }
+
+         {
+            var text = "2019-12-25";
+            var match = Regex.Match(text, @"^(?<year>\d{4})-(?<month>1[0-2]|0[1-9]|[0-9]?)-(?<day>3[01]|[12][0-9]|0[1-9]|[0-9]?)$");
+            Console.WriteLine($"{match.Groups["year"]}-{match.Groups["month"]}-{match.Groups["day"]}");
          }
       }
    }
