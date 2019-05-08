@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace chapter_08_05
+namespace chapter_09_05
 {
    unsafe struct Node
    {

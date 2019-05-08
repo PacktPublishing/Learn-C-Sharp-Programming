@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 
-namespace chapter_07_01.version2
+namespace chapter_08_01.version1
 {
    public enum Status { Started, Stopped }
 
@@ -13,22 +12,19 @@ namespace chapter_07_01.version2
 
       public void RegisterStatusChangeHandler(StatusChange handler)
       {
-         statusChangeHandler += handler;
-      }
-
-      public void UnregisterStatusChangeHandler(StatusChange handler)
-      {
-         statusChangeHandler -= handler;
+         statusChangeHandler = handler;
       }
 
       public void Start()
       {
-         statusChangeHandler?.Invoke(Status.Started);
+         if (statusChangeHandler != null)
+            statusChangeHandler(Status.Started);
       }
 
       public void Stop()
       {
-         statusChangeHandler?.Invoke(Status.Stopped);
+         if (statusChangeHandler != null)
+            statusChangeHandler(Status.Stopped);
       }
    }
 
@@ -38,26 +34,15 @@ namespace chapter_07_01.version2
       {
          Engine engine = new Engine();
          engine.RegisterStatusChangeHandler(OnEngineStatusChanged);
-         engine.RegisterStatusChangeHandler(OnEngineStatusChanged2);
 
          engine.Start();
+
          engine.Stop();
-
-         engine.UnregisterStatusChangeHandler(OnEngineStatusChanged2);
-
-         engine.Start();
       }
 
       private static void OnEngineStatusChanged(Status status)
       {
          Console.WriteLine($"Engine is now {status}");
-      }
-
-      private static void OnEngineStatusChanged2(Status status)
-      {
-         File.AppendAllText(
-            @"c:\temp\engine.log",
-            $"Engine is now {status}\n");
       }
    }
 }

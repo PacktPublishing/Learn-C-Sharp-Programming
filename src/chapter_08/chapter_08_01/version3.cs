@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace chapter_07_01.version3
+namespace chapter_08_01.version3
 {
    public enum Status { Started, Stopped }
 

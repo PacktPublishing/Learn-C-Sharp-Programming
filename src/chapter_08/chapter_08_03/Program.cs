@@ -1,194 +1,141 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace chapter_08_03
 {
-   public class Engine : IDisposable
+   class Airplane
    {
-      private bool disposed = false;
-
-      protected virtual void Dispose(bool disposing)
-      {
-         if (!disposed)
-         {
-            if (disposing)
-            {
-               // dispose managed objects
-            }
-
-            disposed = true;
-         }
-      }
-
-      public void Dispose()
-      {
-         Dispose(true);
-      }
+      public void Fly() { }
    }
 
-   public class Car : IDisposable
+   class Bike
    {
-      private Engine engine;
-
-      public Car(Engine e)
-      {
-         engine = e;
-      }
-
-      #region IDisposable Support
-
-      private bool disposed = false;
-
-      protected virtual void Dispose(bool disposing)
-      {
-         if (!disposed)
-         {
-            if (disposing)
-            {
-               engine?.Dispose();
-            }
-
-            disposed = true;
-         }
-      }
-
-      public void Dispose()
-      {
-         Dispose(true);
-      }
-
-      #endregion
+      public void Ride() { }
    }
 
-   public class ElectricCar : Car
+   class Car
    {
-      public ElectricCar(Engine e):base(e)
-      {
-      }
+      public bool HasAutoDrive { get; }
 
-      protected override void Dispose(bool disposing)
-      {
-         base.Dispose(disposing);
-      }
-   }
-
-   public class HandleWrapper : IDisposable
-   {
-      [DllImport("kernel32.dll", SetLastError = true)]
-      static extern bool CloseHandle(IntPtr hHandle);
-
-      public IntPtr Handle { get; private set; }
-
-      public HandleWrapper(IntPtr ptr)
-      {
-         Handle = ptr;
-      }
-
-      #region IDisposable Support
-      private bool disposed = false; // To detect redundant calls
-
-      protected virtual void Dispose(bool disposing)
-      {
-         if (!disposed)
-         {
-            if (disposing)
-            {
-               // nothing to dispose
-            }
-
-            if (Handle != default)
-               CloseHandle(Handle);
-
-            disposed = true;
-         }
-      }
-
-      ~HandleWrapper()
-      {
-         Dispose(false);
-      }
-
-      // This code added to correctly implement the disposable pattern.
-      public void Dispose()
-      {
-         Dispose(true);
-         GC.SuppressFinalize(this);
-      }
-      #endregion
-   }
-
-   public class MyResource : IDisposable
-   {
-      private bool disposed = false;
-
-      protected virtual void Dispose(bool disposing)
-      {
-         if (!disposed)
-         {
-            if (disposing)
-            {
-               // dispose managed objects
-            }
-
-            // free unmanaged resources
-            // set large fields to null.
-
-            disposed = true;
-         }
-      }
-
-      ~MyResource()
-      {
-         Dispose(false);
-      }
-
-      public void Dispose()
-      {
-         Dispose(true);
-         GC.SuppressFinalize(this);
-      }
+      public void Drive() { }
+      public void AutoDrive() { }
    }
 
    class Program
    {
       static void Main(string[] args)
       {
+         bool IsTrue(object value)
          {
-            Car car = null;
+            if (value is null) return false;
+            else if (value is 1) return true;
+            else if (value is true) return true;
+            else if (value is "true") return true;
+            else if (value is "1") return true;
+            return false;
+         }
 
-            try
+         void SetInMotion1(object vehicle)
+         {
+            if (vehicle is null)
+               throw new ArgumentNullException(
+                     message: "Vehicle must not be null",
+                     paramName: nameof(vehicle));
+            else if (vehicle is Airplane a)
+               a.Fly();
+            else if (vehicle is Bike b)
+               b.Ride();
+            else if (vehicle is Car c)
+               if (c.HasAutoDrive) c.AutoDrive();
+               else c.Drive();
+            else
+            throw new ArgumentException(
+               message: "Unexpected vehicle type",
+               paramName: nameof(vehicle));
+         }
+
+         void SetInMotion2(object vehicle)
+         {
+            switch (vehicle)
             {
-               car = new Car(new Engine());
-               // use the car here
-            }
-            finally
-            {
-               car?.Dispose();
+               case Airplane a:
+                  a.Fly();
+                  break;
+               case Bike b:
+                  b.Ride();
+                  break;
+               case Car c:
+                  if (c.HasAutoDrive) c.AutoDrive();
+                  else c.Drive();
+                  break;
+               case null:
+                  throw new ArgumentNullException(
+                     message: "Vehicle must not be null",
+                     paramName: nameof(vehicle));
+               default:
+                  throw new ArgumentException(
+                     message: "Unexpected vehicle type",
+                     paramName: nameof(vehicle));
             }
          }
 
+         void SetInMotion3(object vehicle)
          {
-            using (Car car = new Car(new Engine()))
+            switch (vehicle)
             {
-               // use the car here
+               case Airplane a:
+                  a.Fly();
+                  break;
+               case Bike b:
+                  b.Ride();
+                  break;
+               case Car c when c.HasAutoDrive:
+                  c.AutoDrive();
+                  break;
+               case Car c:
+                  c.Drive();
+                  break;
+               case null:
+                  throw new ArgumentNullException(
+                     message: "Vehicle must not be null",
+                     paramName: nameof(vehicle));
+               default:
+                  throw new ArgumentException(
+                     message: "Unexpected vehicle type",
+                     paramName: nameof(vehicle));
+            }
+         }
+         
+         void ExecuteCommand(string command)
+         {
+            switch(command)
+            {
+               case "add":  /* add */ break;
+               case "del":  /* delete */ break;
+               case "exit": /* exit */ break;
+               case var o when (o?.Trim().Length ?? 0) == 0:
+                  /* do nothing */
+                  break;
+               default:
+                  /* invalid command */
+                  break;
             }
          }
 
-         {
-            using (Car car1 = new Car(new Engine()),
-                       car2 = new Car(new Engine()))
-            {
-               // use car1 and car2 here
-            }
-         }
+         Console.WriteLine(IsTrue(null));    // False
+         Console.WriteLine(IsTrue(0));       // False
+         Console.WriteLine(IsTrue(1));       // True
+         Console.WriteLine(IsTrue(true));    // True
+         Console.WriteLine(IsTrue("true"));  // True
+         Console.WriteLine(IsTrue("1"));     // True
+         Console.WriteLine(IsTrue("demo"));  // False
 
-         {
-            using (Car car1 = new Car(new Engine()))
-            using (Car car2 = new Car(new Engine()))
-            {
-               // use car1 and car2 here
-            }
-         }
+         SetInMotion1(new Car());
+         SetInMotion2(new Car());
+         SetInMotion3(new Car());
+
+         ExecuteCommand("add");
+         ExecuteCommand("quit");
+         ExecuteCommand(null);
       }
    }
 }

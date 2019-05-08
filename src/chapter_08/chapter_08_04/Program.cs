@@ -1,121 +1,158 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace chapter_08_04
 {
-   static class WindowsAPI
+   class Roman
    {
-      public static class MessageButtons
+      static readonly Dictionary<int, string> NumberRomanDictionary;
+
+      static Roman()
       {
-         public const int MB_OK = 0;
-         public const int MB_OKCANCEL = 1;
-         public const int MB_YESNOCANCEL = 3;
-         public const int MB_YESNO = 4;
+         NumberRomanDictionary = new Dictionary<int, string>
+        {
+            { 1000, "M" },
+            { 900, "CM" },
+            { 500, "D" },
+            { 400, "CD" },
+            { 100, "C" },
+            { 50, "L" },
+            { 40, "XL" },
+            { 10, "X" },
+            { 9, "IX" },
+            { 5, "V" },
+            { 4, "IV" },
+            { 1, "I" },
+        };
       }
 
-      public static class MessageIcons
+      public static string To(int number)
       {
-         public const int MB_ICONERROR = 0x10;
-         public const int MB_ICONQUESTION = 0x20;
-         public const int MB_ICONWARNING = 0x30;
-         public const int MB_ICONINFORMATION = 0x40;
+         var roman = new StringBuilder();
+
+         foreach (var item in NumberRomanDictionary)
+         {
+            while (number >= item.Key)
+            {
+               roman.Append(item.Value);
+               number -= item.Key;
+            }
+         }
+
+         return roman.ToString();
       }
-
-      public static class MessageResult
-      {
-         public const int IDOK = 1;
-         public const int IDCANCEL = 2;
-         public const int IDABORT = 3;
-         public const int IDRETRY = 4;
-         public const int IDIGNORE = 5;
-         public const int IDYES = 6;
-         public const int IDNO = 7;
-         public const int IDTRYAGAIN = 10;
-         public const int IDCONTINUE = 11;
-      }
-
-      public static class ErrorCodes
-      {
-         public const int ERROR_SUCCESS = 0;
-         public const int ERROR_INVALID_FUNCTION = 1;
-         public const int ERROR_FILE_NOT_FOUND = 2;
-         public const int ERROR_PATH_NOT_FOUND = 3;
-         public const int ERROR_TOO_MANY_OPEN_FILES = 4;
-         public const int ERROR_ACCESS_DENIED = 5;
-         public const int ERROR_INVALID_HANDLE = 6;
-         public const int ERROR_BUFFER_OVERFLOW = 111;
-         public const int ERROR_INSUFFICIENT_BUFFER = 122;
-      }
-
-      [DllImport("user32.dll")]
-      public static extern int MessageBox(IntPtr hWnd,
-                                          string lpText,
-                                          string lpCaption,
-                                          uint uType);
-
-      [DllImport("kernel32.dll", SetLastError = true, 
-                                 CharSet = CharSet.Unicode)]
-      public static extern bool GetComputerName(StringBuilder lpBuffer, 
-                                                ref uint nSize);
-
-      [DllImport("advapi32.dll", SetLastError = true,
-                                 CharSet = CharSet.Unicode)]
-      public static extern bool GetUserName(StringBuilder lpBuffer,
-                                            ref uint nSize);
    }
-
 
    class Program
    {
       static void Main(string[] args)
       {
          {
-            uint size = 0;
-            var result = WindowsAPI.GetUserName(null, ref size);
-            if(!result &&
-               Marshal.GetLastWin32Error() == WindowsAPI.ErrorCodes.ERROR_INSUFFICIENT_BUFFER)
-            {
-               Console.WriteLine($"Requires buffer size: {size}");
+            var text = "123۳۲١८৮੪૯୫୬१७੩௮௫౫೮൬൪๘໒໕២៧៦᠖";
+            var match = Regex.Match(text, @"\d+");
+            Console.WriteLine($"[{match.Index}..{match.Length}]: {match.Value}");
+         }
 
-               StringBuilder buffer = new StringBuilder((int)size);
-               result = WindowsAPI.GetUserName(buffer, ref size);
-               if(result)
-               {
-                  Console.WriteLine($"User name: {buffer.ToString()}");
-               }
+         {
+            var text = "123۳۲١८৮੪૯୫୬१७੩௮௫౫೮൬൪๘໒໕២៧៦᠖";
+            var match = Regex.Match(text, @"\d+", RegexOptions.ECMAScript);
+            Console.WriteLine($"[{match.Index}..{match.Length}]: {match.Value}");
+         }
+
+         var pattern = @"(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})";
+
+         {
+            var success = Regex.IsMatch("2019-12-25", pattern);
+            Console.WriteLine(success);
+         }
+
+         {
+            var regex = new Regex(pattern);
+            var success = regex.IsMatch("2019-12-25");
+            Console.WriteLine(success);
+         }
+
+         {
+            var success = Regex.IsMatch(
+               "2019-12-25",
+               @"^(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})$",
+               RegexOptions.ECMAScript,
+               TimeSpan.FromMilliseconds(1));
+            Console.WriteLine(success);
+         }
+
+         {
+            var text = "2019-12-25";
+            var match = Regex.Match(text, pattern);
+            Console.WriteLine(match.Value);
+            Console.WriteLine($"{match.Groups[1]}.{match.Groups[2]}.{match.Groups[3]}");
+         }
+
+         {
+            var text = "2019-12-25";
+            var regex = new Regex(@"^(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})$");
+            var match = regex.Match(text);
+            Console.WriteLine(match.Value);
+         }
+
+         {
+            var text = "2019-05-01,2019-5-9,2019-12-25,2019-13-21";
+            var matches = Regex.Matches(text, @"(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})");
+            foreach(Match match in matches)
+               Console.WriteLine(match);
+            for (int i = 0; i < matches.Count; ++i)
+               if(matches[i].Success)
+                  Console.WriteLine(
+                     $"[{matches[i].Index}..{matches[i].Length}]={matches[i].Value}");
+         }
+
+         {
+            var text = "2019-05-01,2019-5-9,2019-12-25,2019-13-21";
+            var matches = Regex.Matches(text, @"(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})");
+            foreach (Match match in matches)
+               Console.WriteLine(match.Groups[1].Value);
+            for (int i = 0; i < matches.Count; ++i)
+               if (matches[i].Success)
+                  Console.WriteLine(
+                     $"[{matches[i].Index}..{matches[i].Length}]={matches[i].Groups[1].Value}");
+         }
+
+         {
+            var text = "2019-05-01\n2019-5-9\n2019-12-25\n2019-13-21\n2019-1-32";
+            var matches = Regex.Matches(text, @"^(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})$", RegexOptions.Multiline);
+            foreach(Match match in matches)
+            {
+               Console.WriteLine(
+                     $"[{match.Index}..{match.Length}]={match.Value}");
+             }
+         }
+
+         {
+            var text = "2019-05-01\n2019-5-9\n2019-12-25\n2019-13-21";
+            var matches = Regex.Matches(
+               text,
+               @"^(\d{4})-(1[0-2]|0[1-9]|[1-9]{1})-(3[01]|[12][0-9]|0[1-9]|[1-9]{1})$", 
+               RegexOptions.Multiline, 
+               TimeSpan.FromMilliseconds(1));
+
+            foreach (Match match in matches)
+            {
+               Console.WriteLine($"{match.Groups[1]}-{match.Groups[2]}-{match.Groups[3]}");
             }
          }
 
          {
-            uint size = 0;
-            var result = WindowsAPI.GetComputerName(null, ref size);
-            if (!result &&
-               Marshal.GetLastWin32Error() == WindowsAPI.ErrorCodes.ERROR_BUFFER_OVERFLOW)
-            {
-               Console.WriteLine($"Requires buffer size: {size}");
-
-               StringBuilder buffer = new StringBuilder();
-               result = WindowsAPI.GetComputerName(buffer, ref size);
-               if (result)
-               {
-                  Console.WriteLine($"Computer name: {buffer.ToString()}");
-               }
-            }
+            var text = "2019-12-25";
+            var match = Regex.Match(text, @"^(?<year>\d{4})-(?<month>1[0-2]|0[1-9]|[1-9]{1})-(?<day>3[01]|[12][0-9]|0[1-9]|[1-9]{1})$");
+            Console.WriteLine($"{match.Groups["year"]}-{match.Groups["month"]}-{match.Groups["day"]}");
          }
 
          {
-            var result = WindowsAPI.MessageBox(
-                            IntPtr.Zero,
-                            "Is this book helpful?",
-                            "Question",
-                            WindowsAPI.MessageButtons.MB_YESNO |
-                            WindowsAPI.MessageIcons.MB_ICONQUESTION);
-
-            if (result == WindowsAPI.MessageResult.IDYES)
-            {
-               Console.WriteLine("time to learn more");
-            }
+            var text = "2019-12-25";
+            var result = Regex.Replace(text, pattern, m => $"{m.Groups[2]}/{m.Groups[3]}/{m.Groups[1]}");
+            Console.WriteLine(result);
          }
       }
    }
