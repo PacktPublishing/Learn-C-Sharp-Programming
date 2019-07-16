@@ -19,7 +19,7 @@ namespace chapter_06
             rectangle2.GetDimension();
 
             Square objSquare = new Square(10);
-            Console.WriteLine("The area of sqaure is " + objSquare.CalculateArea());
+            Console.WriteLine("The area of square is " + objSquare.CalculateArea());
 
             Circle objCircle = new Circle(7.5);
             Console.WriteLine("The area of circle is " + objCircle.CalculateArea());
