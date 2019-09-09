@@ -74,6 +74,66 @@ namespace chapter_02
             var s3 = @"This text
 spawns multiple lines.";
          }
+
+         {
+            bool f;
+            char ch = 'x';
+            int a, b = 20, c = 42;
+
+            a = -1;
+            f = true;
+         }
+
+         {
+            for (int i = 1; i < 10; i++)
+            {
+               Console.WriteLine(i);
+            }
+
+            // i = 20; // i is out of scope
+         }
+
+         {
+            int a = 5;
+            for (int i = 1; i < 10; i++)
+            {
+               //char a = 'w';                 // compile error
+               if (i % 2 == 0)
+               {
+                  Console.WriteLine(i + a); // a is within the scope of Main
+               }
+            }
+
+            // i = 20;                           // i is out of scope
+         }
+
+         {
+            int x = 42;
+            object o = x;   // boxing
+
+            o = 43;
+            int y = (int)o; // unboxing
+
+            Console.WriteLine(x);  // 42
+            Console.WriteLine(y);  // 43
+         }
+
+         {
+            int? a;
+            int? b = null;
+            int? c = 42;
+
+            if (c.HasValue)
+               Console.WriteLine(c.Value);
+
+            int d = c ?? -1;
+         }
+
+         {
+            Nullable<int> a;
+            Nullable<int> b = null;
+            Nullable<int> c = 42;
+         }
       }
    }
 }
