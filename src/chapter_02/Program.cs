@@ -2,6 +2,19 @@
 
 namespace chapter_02
 {
+   public readonly struct fancyint
+   {
+      private readonly int value;
+      public fancyint(int value)
+      {
+         this.value = value;
+      }
+      public static implicit operator int(fancyint v) => v.value;
+      public static explicit operator fancyint(int v) => new fancyint(v);
+
+      public override string ToString() => $"{value}";
+   }
+
    class Program
    {
       static void Main(string[] args)
@@ -213,6 +226,38 @@ spawns multiple lines.";
                }
                Console.WriteLine();
             }
+         }
+
+         {
+            int i = 10;
+            float f = i;
+
+            long l = 7195467872;
+            double d = l;
+
+            string s = "example";
+            object o = s;          // implicit conversion
+            string r = (string)o;  // explicit conversion
+         }
+
+         {
+            double d = 12.34;
+            int i = (int)d;
+         }
+
+         {
+            fancyint a = new fancyint(42);
+            int i = a;                 // implicit conversion
+            fancyint b = (fancyint)i;  // explicit conversion
+         }
+
+         {
+            DateTime dt1 = DateTime.Parse("2019.08.31");
+            DateTime.TryParse("2019.08.31", out DateTime dt2);
+
+            int i1 = int.Parse("42");
+            int i2 = int.Parse("42.15");
+            int.TryParse("42.15", out int i3);
          }
       }
    }
