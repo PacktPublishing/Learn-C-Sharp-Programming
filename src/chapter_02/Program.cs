@@ -256,8 +256,62 @@ spawns multiple lines.";
             DateTime.TryParse("2019.08.31", out DateTime dt2);
 
             int i1 = int.Parse("42");
-            int i2 = int.Parse("42.15");
+            try
+            {
+               int i2 = int.Parse("42.15");
+            }
+            catch { }
             int.TryParse("42.15", out int i3);
+         }
+
+         {
+            int a = 10;
+            int b = a++;
+         }
+
+         {
+            int a = 10;
+            int b = ++a;
+         }
+
+         {
+            bool a = true, b = false;
+            bool c = a && b;
+            bool d = a || !b;
+         }
+
+         {
+            int a = 10;      // 1010
+            int b = 5;       // 0101
+            int c = a & b;   // 0000
+            int d = a | b;   // 1111
+         }
+
+         {
+            int x = 0b_0000_0110;
+            x = x << 4;  // 0b_0110_0000
+            Console.WriteLine(Convert.ToString(x, 2));
+
+            uint y = 0b_1111_0000_0000_0000_1111_1110_1100_1000;
+            y = y << 2;  // 0b_1100_0000_0000_0011_1111_1011_0010_0000;
+            Console.WriteLine(Convert.ToString(y, 2));
+         }
+
+         {
+            int x = 0b_0000_0000;
+            x = x >> 4;  // 0b_0110_0000
+            Console.WriteLine(Convert.ToString(x, 2));
+
+            uint y = 0b_1111_0000_0000_0000_1111_1110_1100_1000;
+            y = y >> 2;  // 0b_0011_1100_0000_0000_0011_1111_1011_0010;
+            Console.WriteLine(Convert.ToString(y, 2));
+         }
+
+         {
+            int a = 42;
+            a = a + 11;
+            // or
+            a += 11;
          }
       }
    }
