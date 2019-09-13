@@ -202,7 +202,6 @@ namespace chapter_03
 
       static void Main(string[] args)
       {
-         FibonacciAsync_demo();
          if_demo();
          switch_demo();
          for_demo();
