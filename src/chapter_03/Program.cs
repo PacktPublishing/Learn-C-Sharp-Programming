@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace chapter_03
 {
@@ -143,8 +144,65 @@ namespace chapter_03
          }
       }
 
+      static void break_demo()
+      {
+         for (int i = 0; i <= 10; i++)
+         {
+            Console.WriteLine(i);
+            if (i == 5)
+            {
+               break;
+            }
+         }
+      }
+
+      static void continue_demo()
+      {
+         for (int i = 0; i <= 10; i++)
+         {
+            if (i % 2 == 0)
+            {
+               continue;
+            }
+            Console.WriteLine(i);
+         }
+      }
+
+      static int Fibonacci(int n)
+      {
+         if (n > 1)
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
+         else
+            return n;
+      }
+
+      static void goto_demo()
+      {
+         for (int i = 0; i <= 10; i++)
+         {
+            Console.WriteLine(i);
+            if (i == 5)
+            {
+               goto printmessage;
+            }
+         }
+
+      printmessage:
+         Console.WriteLine("The goto statement is executed");
+      }
+
+      static IEnumerable<int> FibonacciAsync(int n)
+      {
+         if (n > 1)
+            yield return Fibonacci(n - 1) + Fibonacci(n - 2);
+         else
+            yield return n;
+      }
+
+
       static void Main(string[] args)
       {
+         FibonacciAsync_demo();
          if_demo();
          switch_demo();
          for_demo();
@@ -152,6 +210,9 @@ namespace chapter_03
          do_while_demo();
          foreach_demo();
          ref_foreach_demo();
+         break_demo();
+         continue_demo();
+         goto_demo();
       }
    }
 }
