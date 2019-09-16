@@ -15,8 +15,28 @@ namespace chapter_02
       public override string ToString() => $"{value}";
    }
 
+   class foo
+   {
+      readonly string text;
+
+      public foo(string value)
+      {
+         text = value ?? throw new ArgumentNullException(nameof(value));
+      }
+   }
+
    class Program
    {
+      static int max(int a, int b)
+      {
+         return a >= b ? a : b;
+      }
+
+      static string GetDisplayName(string name, string email)
+      {
+         return name ?? email ?? "unknown";
+      }
+
       static void Main(string[] args)
       {
          {
@@ -312,6 +332,26 @@ spawns multiple lines.";
             a = a + 11;
             // or
             a += 11;
+         }
+
+         {
+            var m = max(12, 42);
+         }
+
+         {
+            int a = 42;
+            int b = 21;
+            int.TryParse(Console.ReadLine(), out int alt);
+            ref int v = ref (alt % 2 == 0 ? ref a : ref b);
+            v++;
+            Console.WriteLine($"a={a}, b={b}");
+         }
+
+         {
+            int? n1 = null;
+            int n2 = n1 ?? 2;  // n2 is set to 2
+            n1 = 5;
+            int n3 = n1 ?? 2;  // n3 is set to 5
          }
       }
    }
