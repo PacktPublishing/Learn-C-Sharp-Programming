@@ -2,6 +2,7 @@
 
 namespace chapter_02
 {
+#pragma warning disable CS0219, CS0168
    public readonly struct fancyint
    {
       private readonly int value;
@@ -17,9 +18,19 @@ namespace chapter_02
 
    class foo
    {
+      public int run() { return 42; }
+   }
+
+   class bar
+   {
+      public foo f { get; set; }
+   }
+
+   class foobar
+   {
       readonly string text;
 
-      public foo(string value)
+      public foobar(string value)
       {
          text = value ?? throw new ArgumentNullException(nameof(value));
       }
@@ -333,26 +344,7 @@ spawns multiple lines.";
             // or
             a += 11;
          }
-
-         {
-            var m = max(12, 42);
-         }
-
-         {
-            int a = 42;
-            int b = 21;
-            int.TryParse(Console.ReadLine(), out int alt);
-            ref int v = ref (alt % 2 == 0 ? ref a : ref b);
-            v++;
-            Console.WriteLine($"a={a}, b={b}");
-         }
-
-         {
-            int? n1 = null;
-            int n2 = n1 ?? 2;  // n2 is set to 2
-            n1 = 5;
-            int n3 = n1 ?? 2;  // n3 is set to 5
-         }
       }
    }
+#pragma warning restore CS0219, CS0168
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace chapter_03
 {
@@ -199,6 +201,91 @@ namespace chapter_03
             yield return n;
       }
 
+      static void yield_demo()
+      {
+         {
+            IEnumerable<int> GetNumbers()
+            {
+               var list = new List<int>();
+               for (int i = 1; i <= 100; ++i)
+               {
+                  list.Add(i);
+               }
+
+               return list;
+            }
+
+            var numbers = GetNumbers().Take(5);
+            Console.WriteLine(string.Join(",", numbers));
+         }
+
+         {
+            IEnumerable<int> GetNumbers()
+            {
+               for (int i = 1; i <= 100; ++i)
+               {
+                  yield return i;
+               }
+            }
+
+            var numbers = GetNumbers().Take(5);
+            Console.WriteLine(string.Join(",", numbers));
+         }
+
+         {
+            IEnumerable<int> GetNumbers()
+            {
+               for (int i = 1; i <= 100; ++i)
+               {
+                  Thread.Sleep(1000);
+                  Console.WriteLine($"Produced: {i}");
+                  yield return i;
+               }
+            }
+
+            foreach (var i in GetNumbers().Take(5))
+            {
+               Console.WriteLine($"Consumed: {i}");
+            }
+         }
+      }
+
+
+      static void FunctionThatThrows(object o)
+      {
+         if (o is null)
+            throw new ArgumentNullException(nameof(o));
+
+         if (!(o is string))
+            throw new ArgumentException("A string is expected");
+
+         // do something
+      }
+
+      static void exceptions_demo()
+      {
+         try
+         {
+            Console.WriteLine("executing");
+            FunctionThatThrows(42);
+         }
+         catch (ArgumentNullException e)
+         {
+            Console.WriteLine($"Null argument: {e.Message}");
+         }
+         catch (ArgumentException e)
+         {
+            Console.WriteLine($"Wrong argument: {e.Message}");
+         }
+         catch(Exception e)
+         {
+            Console.WriteLine($"Error: {e.Message}");
+         }
+         finally
+         {
+            Console.WriteLine("done");
+         }
+      }
 
       static void Main(string[] args)
       {
@@ -212,6 +299,8 @@ namespace chapter_03
          break_demo();
          continue_demo();
          goto_demo();
+         yield_demo();
+         exceptions_demo();
       }
    }
 }
