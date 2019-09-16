@@ -199,6 +199,41 @@ namespace chapter_03
             yield return n;
       }
 
+      static void FunctionThatThrows(object o)
+      {
+         if (o is null)
+            throw new ArgumentNullException(nameof(o));
+
+         if (!(o is string))
+            throw new ArgumentException("A string is expected");
+
+         // do something
+      }
+
+      static void exceptions_demo()
+      {
+         try
+         {
+            Console.WriteLine("executing");
+            FunctionThatThrows(42);
+         }
+         catch (ArgumentNullException e)
+         {
+            Console.WriteLine($"Null argument: {e.Message}");
+         }
+         catch (ArgumentException e)
+         {
+            Console.WriteLine($"Wrong argument: {e.Message}");
+         }
+         catch(Exception e)
+         {
+            Console.WriteLine($"Error: {e.Message}");
+         }
+         finally
+         {
+            Console.WriteLine("done");
+         }
+      }
 
       static void Main(string[] args)
       {
@@ -212,6 +247,7 @@ namespace chapter_03
          break_demo();
          continue_demo();
          goto_demo();
+         exceptions_demo();
       }
    }
 }

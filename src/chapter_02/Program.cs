@@ -15,6 +15,16 @@ namespace chapter_02
       public override string ToString() => $"{value}";
    }
 
+   class foo
+   {
+      public int run() { return 42; }
+   }
+
+   class bar
+   {
+      public foo f { get; set; }
+   }
+
    class Program
    {
       static void Main(string[] args)
@@ -312,6 +322,16 @@ spawns multiple lines.";
             a = a + 11;
             // or
             a += 11;
+         }
+
+         {
+            foo f = null;
+            int? i = f?.run();
+         }
+
+         {
+            bar[] bars = new bar[] { null };
+            int? i = bars?[0].f?.run();
          }
       }
    }
