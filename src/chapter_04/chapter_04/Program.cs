@@ -4,26 +4,67 @@ using System;
 
 namespace chapter_04
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Customer.FirstName = "Jhon";
+   class Program
+   {
+      static void Main(string[] args)
+      {
+         // classes
+
+         {
+            v1.Employee obj = new v1.Employee();
+            obj.EmployeeId = 1;
+            obj.FirstName = "John";
+            obj.LastName = "Doe";
+         }
+
+         {
+            v2.Employee obj = new v2.Employee(1);
+            obj.FirstName = "John";
+            obj.LastName = "Doe";
+         }
+
+         {
+            v1.Employee obj1 = new v1.Employee();
+            obj1.EmployeeId = 1;
+
+            v1.Employee obj2 = obj1; 
+            obj2.FirstName = "John";    // obj1.FirstName == "John"
+            obj2.LastName = "Doe";      // obj1.LastName == "Doe"
+         }
+
+         // constructors
+
+         {
+            v3.Employee obj = new v3.Employee(1, "John", "Doe");
+
+            string fullName = obj.GetEmployeeName();
+
+            Console.WriteLine("Employee ID is: {0}", obj.EmployeeId);
+            Console.WriteLine("The full name of employee is: {0}", fullName);
+         }
+
+         {
+            v1.Employee obj = new v1.Employee()
+            {
+               EmployeeId = 1,
+               FirstName = "John",
+               LastName = "Doe"
+            };
+         }
+
+
+         // 
+
+         {
+            Customer.FirstName = "John";
             Customer.LastName = "Doe";
             Customer.GetFullName();
-
-            Employee objEmployee = new Employee(1, "John", "Doe");
-
-            string fullName = objEmployee.GetEmployeeName();
-
-            Console.WriteLine("Employee ID is: {0}", objEmployee.EmployeeID);
-            Console.WriteLine("The full name of employee is: {0}", fullName);
 
             Student student = new Student();
             for (int i = 0; i < 5; i++)
             {
-                student[i] = i + 1;
-                Console.WriteLine(student[i]);
+               student[i] = i + 1;
+               Console.WriteLine(student[i]);
             }
 
             student.FirstName = "Mark";
@@ -65,20 +106,21 @@ namespace chapter_04
             int value2 = (int)boxObject; // Unboxing
 
             Console.ReadLine();
-        }
+         }
+      }
 
-        static void Swap(ref int a, ref int b)
-        {
-            int temp;
+      static void Swap(ref int a, ref int b)
+      {
+         int temp;
 
-            temp = a;
-            a = b;
-            b = temp;
-        }
+         temp = a;
+         a = b;
+         b = temp;
+      }
 
-        static void Square(int input, out int output)
-        {
-            output = input * input;
-        }
-    }
+      static void Square(int input, out int output)
+      {
+         output = input * input;
+      }
+   }
 }
