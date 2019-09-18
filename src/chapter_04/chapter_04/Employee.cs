@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace chapter_04
@@ -256,4 +257,83 @@ namespace chapter_04
          public Employee() => Roles = new ProjectRoles();
       }
    }
+
+   namespace v15
+   {
+      class Employee
+      {
+         public int EmployeeID;
+         public string FirstName;
+         public string LastName;
+
+         public Employee(int EmployeeID, string FirstName, string LastName)
+         {
+            this.EmployeeID = EmployeeID;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+         }
+      }
+   }
+
+   namespace v16
+   {
+      class Employee
+      {
+         private static int id = 1;
+
+         public int EmployeeId { get; private set; }
+         public string FirstName { get; private set; }
+         public string LastName { get; private set; }
+
+         private Employee(int id, string firstName, string lastName)
+         {
+            EmployeeId = id;
+            FirstName = firstName;
+            LastName = lastName;
+         }
+
+         public static Employee Create(string firstName, string lastName)
+         {
+            return new Employee(id++, firstName, lastName);
+         }
+      }
+   }
+
+   namespace v17
+   {
+      class Employee
+      {
+         private static int id;
+
+         public int EmployeeId { get; private set; }
+         public string FirstName { get; private set; }
+         public string LastName { get; private set; }
+
+         static Employee()
+         {
+            string text = "1";
+            try
+            {
+               text = File.ReadAllText("app.data");
+            }
+            catch { }
+            int.TryParse(text, out id);
+         }
+
+         private Employee(int id, string firstName, string lastName)
+         {
+            EmployeeId = id;
+            FirstName = firstName;
+            LastName = lastName;
+         }
+
+         public static Employee Create(string firstName, string lastName)
+         {
+            var employee = new Employee(id++, firstName, lastName);
+            File.WriteAllText("app.data", id.ToString());
+            return employee;
+         }
+      }
+   }
+
 }

@@ -4,6 +4,19 @@ using System;
 
 namespace chapter_04
 {
+   static class MassConverters
+   {
+      public static double PoundToKg(double pounds)
+      {
+         return pounds * 0.45359237;
+      }
+
+      public static double KgToPound(double kgs)
+      {
+         return kgs * 2.20462262185;
+      }
+   }
+
    class Program
    {
       static void Main(string[] args)
@@ -100,6 +113,26 @@ namespace chapter_04
                   Console.WriteLine(ex.Message);
                }
             }
+         }
+
+         // static 
+         {
+            v16.Employee obj1 = v16.Employee.Create("John", "Doe");
+            v16.Employee obj2 = v16.Employee.Create("Jane", "Doe");
+            Console.WriteLine($"{obj1.EmployeeId} {obj1.FirstName}");
+            Console.WriteLine($"{obj2.EmployeeId} {obj2.FirstName}");
+         }
+
+         {
+            var lbs = MassConverters.KgToPound(42.5);
+            var kgs = MassConverters.PoundToKg(180);
+         }
+
+         {
+            v17.Employee obj1 = v17.Employee.Create("John", "Doe");
+            v17.Employee obj2 = v17.Employee.Create("Jane", "Doe");
+            Console.WriteLine($"{obj1.EmployeeId} {obj1.FirstName}");
+            Console.WriteLine($"{obj2.EmployeeId} {obj2.FirstName}");
          }
 
          {
