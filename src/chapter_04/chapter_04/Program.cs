@@ -53,7 +53,54 @@ namespace chapter_04
          }
 
 
-         // 
+         // properties
+         {
+            v5.Employee obj = new v5.Employee();
+            obj.EmployeeId = 1;
+            obj.FirstName = "John";
+            obj.LastName = "Doe";
+
+            Console.WriteLine($"{obj.EmployeeId} - {obj.LastName}, {obj.FirstName}");
+         }
+
+         {
+            v11.Employee obj = new v11.Employee()
+            {
+               FirstName = "John",
+               LastName = "Doe"
+            };
+
+            Console.WriteLine($"{obj.EmployeeId} - {obj.LastName}, {obj.FirstName}");
+         }
+
+         {
+            v13.Employee obj = new v13.Employee();           
+         }
+
+         // indexers
+         {
+            v14.Employee obj = new v14.Employee()
+            {
+               EmployeeId = 1,
+               FirstName = "John",
+               LastName = "Doe"
+            };
+
+            obj.Roles[1] = "Dev";
+            obj.Roles[3] = "SA";
+            
+            for(int i = 1; i <= 3; ++i)
+            {
+               try
+               {
+                  Console.WriteLine($"Project {i}: role is {obj.Roles[i]}");
+               }
+               catch(Exception ex)
+               {
+                  Console.WriteLine(ex.Message);
+               }
+            }
+         }
 
          {
             Customer.FirstName = "John";
