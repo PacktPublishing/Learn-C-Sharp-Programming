@@ -135,6 +135,43 @@ namespace chapter_04
             Console.WriteLine($"{obj2.EmployeeId} {obj2.FirstName}");
          }
 
+         // ref params
+
+         {
+            int num1 = 10;
+            int num2 = 20;
+
+            Console.WriteLine($"Before swapping: num1={num1}, num2={num2}");
+            Swap(ref num1, ref num2);
+            Console.WriteLine($"After swapping:  num1={num1}, num2={num2}");
+         }
+
+         {
+            v8.Employee e1 = new v8.Employee(1, "John", "Doe");
+            Project proj = new Project("Demo", e1);
+            Console.WriteLine(proj);
+
+            ref v8.Employee owner = ref proj.GetOwner();
+            owner = new v8.Employee(2, "Jane", "Doe");
+            Console.WriteLine(proj);
+         }
+
+         // in
+         {
+            int i = 0;
+            string s = "hello";
+            DontTouch(i, s);
+         }
+
+         // variable params
+         {
+            var a = Any(42 > 15, "text".Length == 3);
+            var b = All(true, false, true);
+            var c = All();
+         }
+
+         // ---------------
+
          {
             Customer.FirstName = "John";
             Customer.LastName = "Doe";
@@ -167,12 +204,7 @@ namespace chapter_04
             Console.WriteLine((int)Priority.Important);
             Console.WriteLine((int)Priority.Urgent);
 
-            int num1 = 10;
-            int num2 = 20;
 
-            Console.WriteLine("Before Swapping - num1 is {0}, num2 is {1}", num1, num2);
-            Swap(ref num1, ref num2);
-            Console.WriteLine("After Swapping - num1 is {0}, num2 is {1}", num1, num2);
 
             int num = 10;
             int SquareNum;
@@ -191,16 +223,37 @@ namespace chapter_04
 
       static void Swap(ref int a, ref int b)
       {
-         int temp;
-
-         temp = a;
+         int temp = a;
          a = b;
          b = temp;
+      }
+
+      static void DontTouch(in int value, in string text)
+      {
+         // value = 42;   // error
+         // ++value;      // error
+         // text = null;  // error
       }
 
       static void Square(int input, out int output)
       {
          output = input * input;
+      }
+
+      static bool Any(params bool [] values)
+      {
+         foreach (bool v in values)
+            if (v) return true;
+         return false;
+      }
+
+      static bool All(params bool[] values)
+      {
+         if (values.Length == 0) return false;
+
+         foreach (bool v in values)
+            if (!v) return false;
+         return true;
       }
    }
 }
