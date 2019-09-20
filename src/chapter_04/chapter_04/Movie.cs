@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace chapter_04
+﻿namespace chapter_04
 {
     public struct Movie 
     {

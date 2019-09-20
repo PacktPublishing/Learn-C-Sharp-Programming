@@ -1,22 +1,8 @@
-﻿using chapter_04.ClassType;
-using chapter_04.Enum;
+﻿using chapter_04.Enum;
 using System;
 
 namespace chapter_04
 {
-   static class MassConverters
-   {
-      public static double PoundToKg(double pounds)
-      {
-         return pounds * 0.45359237;
-      }
-
-      public static double KgToPound(double kgs)
-      {
-         return kgs * 2.20462262185;
-      }
-   }
-
    class Program
    {
       static void Main(string[] args)
@@ -170,27 +156,19 @@ namespace chapter_04
             var c = All();
          }
 
+         // partial classes
+         {
+            v18.Employee obj = new v18.Employee()
+            {
+               EmployeeId = 1,
+               FirstName = "John",
+               LastName = "Doe"
+            };
+         }
+
          // ---------------
 
          {
-            Customer.FirstName = "John";
-            Customer.LastName = "Doe";
-            Customer.GetFullName();
-
-            Student student = new Student();
-            for (int i = 0; i < 5; i++)
-            {
-               student[i] = i + 1;
-               Console.WriteLine(student[i]);
-            }
-
-            student.FirstName = "Mark";
-            Console.WriteLine(student.FirstName);
-
-            PartialClassExample objPartial = new PartialClassExample();
-            objPartial.ID = 1;
-            objPartial.Name = "John";
-
             Movie movie1 = new Movie("Titanic", 8);
             Movie movie2;
             movie2.Title = "Avengers";
@@ -203,21 +181,6 @@ namespace chapter_04
             Console.WriteLine((int)Priority.Normal);
             Console.WriteLine((int)Priority.Important);
             Console.WriteLine((int)Priority.Urgent);
-
-
-
-            int num = 10;
-            int SquareNum;
-            Square(num, out SquareNum);
-            Console.WriteLine(SquareNum);
-
-            int value1 = 10;
-            object boxObject;
-
-            boxObject = value1; // Boxing
-            int value2 = (int)boxObject; // Unboxing
-
-            Console.ReadLine();
          }
       }
 

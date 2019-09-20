@@ -336,4 +336,41 @@ namespace chapter_04
       }
    }
 
+   namespace v18
+   {
+      partial class Employee
+      {
+         public int EmployeeId { get; set; }
+      }
+
+      partial class Employee
+      {
+         public string FirstName { get; set; }
+         public string LastName { get; set; }
+      }
+   }
+
+   namespace v19
+   {
+      partial class Employee
+      {
+         partial void Promote();
+      }
+
+      partial class Employee
+      {
+         public int EmployeeId { get; set; }         
+      }
+
+      partial class Employee
+      {
+         public string FirstName { get; set; }
+         public string LastName { get; set; }
+
+         partial void Promote()
+         {
+            Console.WriteLine("Employee promoted!");
+         }
+      }
+   }
 }
