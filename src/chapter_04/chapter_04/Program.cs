@@ -185,24 +185,7 @@ namespace chapter_04
 
          {
             v20.Employee? obj = null;
-         }
-
-         // ---------------
-
-         {
-            Movie movie1 = new Movie("Titanic", 8);
-            Movie movie2;
-            movie2.Title = "Avengers";
-            movie2.Rating = 9;
-
-            Console.WriteLine(movie1.Title + " has " + movie1.Rating + " rating");
-            Console.WriteLine(movie2.Title + " has " + movie2.Rating + " rating");
-
-            Console.WriteLine((int)Priority.Low);
-            Console.WriteLine((int)Priority.Normal);
-            Console.WriteLine((int)Priority.Important);
-            Console.WriteLine((int)Priority.Urgent);
-         }
+         }        
       }
 
       static void Swap(ref int a, ref int b)
