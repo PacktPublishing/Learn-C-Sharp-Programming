@@ -166,6 +166,27 @@ namespace chapter_04
             };
          }
 
+         // structures
+         {
+            v20.Employee obj = new v20.Employee()
+            {
+               EmployeeId = 1,
+               FirstName = "John",
+               LastName = "Doe"
+            };
+         }
+
+         {
+            v20.Employee obj;
+            obj.EmployeeId = 1;
+            obj.FirstName = "John";
+            obj.LastName = "Doe";
+         }
+
+         {
+            v20.Employee? obj = null;
+         }
+
          // ---------------
 
          {
