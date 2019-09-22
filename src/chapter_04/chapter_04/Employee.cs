@@ -373,14 +373,4 @@ namespace chapter_04
          }
       }
    }
-
-   namespace v20
-   {
-      struct Employee
-      {
-         public int EmployeeId;
-         public string FirstName;
-         public string LastName;
-      }
-   }
 }

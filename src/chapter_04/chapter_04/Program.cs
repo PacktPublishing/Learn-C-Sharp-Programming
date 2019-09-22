@@ -166,26 +166,38 @@ namespace chapter_04
             };
          }
 
-         // structures
+         // structures         
          {
-            v20.Employee obj = new v20.Employee()
+            v1.Point p = new v1.Point()
             {
-               EmployeeId = 1,
-               FirstName = "John",
-               LastName = "Doe"
+               x = 2,
+               y = 3
             };
          }
 
          {
-            v20.Employee obj;
-            obj.EmployeeId = 1;
-            obj.FirstName = "John";
-            obj.LastName = "Doe";
+            v1.Point p;
+            p.x = 2;
+            p.y = 3;
          }
 
          {
-            v20.Employee? obj = null;
-         }        
+            v1.Point? p = null;
+         }
+
+         {
+            v2.Point p1 = new v2.Point(2, 3);
+            v2.Point p2 = new v2.Point(0, 3);
+
+            if (p1.Equals(p2)) { /* do something */ }
+         }
+
+         {
+            v4.Point p1 = new v4.Point(2, 3);
+            v4.Point p2 = new v4.Point(0, 3);
+
+            if (p1 == p2) { /* do something */ }
+         }
       }
 
       static void Swap(ref int a, ref int b)
