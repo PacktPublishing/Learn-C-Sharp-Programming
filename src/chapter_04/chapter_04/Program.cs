@@ -1,8 +1,8 @@
-﻿using chapter_04.Enum;
-using System;
+﻿using System;
 
 namespace chapter_04
 {
+#pragma warning disable CS0219, CS0168
    class Program
    {
       static void Main(string[] args)
@@ -198,7 +198,28 @@ namespace chapter_04
 
             if (p1 == p2) { /* do something */ }
          }
-      }
+
+         // enumerations
+         {
+            v1.Priority p = v1.Priority.Normal;
+            int i = (int)v1.Priority.Normal;
+
+            Console.WriteLine(v1.Priority.Normal);
+            Console.WriteLine((int)v1.Priority.Urgent);
+         }
+
+         {
+            v1.Priority p1 = (v1.Priority)42;
+            v3.Priority p2 = 0;
+            v3.Priority p3 = (v3.Priority)10;
+         }
+
+         {
+            Enum.TryParse("Normal", out v3.Priority p1);
+            Enum.TryParse(typeof(v3.Priority), "normal", true, out object o);
+            v3.Priority p2 = (v3.Priority)o;
+         }
+      } 
 
       static void Swap(ref int a, ref int b)
       {
@@ -235,4 +256,5 @@ namespace chapter_04
          return true;
       }
    }
+#pragma warning restore CS0219, CS0168
 }

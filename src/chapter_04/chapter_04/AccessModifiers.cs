@@ -1,5 +1,6 @@
 ﻿namespace chapter_04
 {
+#pragma warning disable CS0649
    public interface IEngine
    {
       double Power { get; }
@@ -14,4 +15,5 @@
 
       public void Start() { }
    }
+#pragma warning restore CS0649
 }
