@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace chapter_05
+﻿namespace chapter_05
 {
-    public class Employee
-    {
-        private string EmployeeName;
-        private int EmployeeSalary;
+public class Employee
+{
+   private string name;
+   private double salary;
 
-        public string Name
-        {
-            get
-            {
-                return EmployeeName;
-            }
-            set
-            {
-                EmployeeName = value;
-            }
-        }
+   public string Name
+   {
+      get { return name; }
+      set { name = value; }
+   }
 
-        public int Salary
-        {
-            get
-            {
-                return EmployeeSalary;
-            }
-            set
-            {
-                EmployeeSalary = value;
-            }
-        }
-    }
+   public double Salary
+   {
+      get { return salary; }
+   }
+
+   public Employee(string name, double salary)
+   {
+      this.name = name;
+      this.salary = salary;
+   }
+
+   public void GiveRaise(double percent)
+   {
+      salary *= (1.0 + percent / 100.0);
+   }
+}
 }
