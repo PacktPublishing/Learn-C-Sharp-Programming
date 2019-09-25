@@ -1,5 +1,6 @@
 ﻿using chapter_05.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace chapter_05
 {
@@ -11,6 +12,63 @@ namespace chapter_05
          Console.WriteLine($"{employee.Name} earns {employee.Salary}");
          employee.GiveRaise(5.5);
          Console.WriteLine($"{employee.Name} earns {employee.Salary}");
+
+         {
+            var objects = new List<v1.GameUnit>()
+            {
+               new v1.Water(new Position(3, 2)),
+               new v1.Water(new Position(4, 2)),
+               new v1.Water(new Position(5, 2)),
+               new v1.Hill(new Position(3, 1)),
+               new v1.Hill(new Position(5, 3)),
+            };
+
+            var surface = new v1.Surface();
+            surface.BeginDraw();
+
+            foreach (var unit in objects)
+               unit.Draw(surface);
+
+            Console.ReadLine();
+         }
+
+         {
+            var objects = new List<v2.GameUnit>()
+            {
+               new v2.Water(new Position(3, 2)),
+               new v2.Water(new Position(4, 2)),
+               new v2.Water(new Position(5, 2)),
+               new v2.Hill(new Position(3, 1)),
+               new v2.Hill(new Position(5, 3)),
+            };
+
+            var surface = new v1.Surface();
+            surface.BeginDraw();
+
+            foreach (var unit in objects)
+               unit.Draw(surface);
+
+            Console.ReadLine();
+         }
+
+         {
+            var objects = new List<v3.GameUnit>()
+            {
+               new v3.Water(new Position(3, 2)),
+               new v3.Water(new Position(4, 2)),
+               new v3.Water(new Position(5, 2)),
+               new v3.Hill(new Position(3, 1)),
+               new v3.Hill(new Position(5, 3)),
+            };
+
+            var surface = new v1.Surface();
+            surface.BeginDraw();
+
+            foreach (var unit in objects)
+               unit.Draw(surface);
+
+            Console.ReadLine();
+         }
 
          EmployeeOverload employeeOverload = new EmployeeOverload();
          employeeOverload.FullName("William");
