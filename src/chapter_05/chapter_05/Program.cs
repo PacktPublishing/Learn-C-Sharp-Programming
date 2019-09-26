@@ -122,6 +122,15 @@ namespace chapter_05
          }
 
          {
+            var objects = new v6.GameUnit[]
+            {
+                new v6.Water(new Position(3, 2)),
+                new v6.Hill(new Position(3, 1)),
+                new v6.Meeple(new Position(0, 0)),
+            };
+         }
+
+         {
             Derived d = new Derived();
             Console.WriteLine(d.Get()); // prints 10
 

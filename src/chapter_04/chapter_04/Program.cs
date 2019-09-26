@@ -156,6 +156,23 @@ namespace chapter_04
             var c = All();
          }
 
+         // optional paramters
+         {
+            v2.Point p1 = new v2.Point();     // x = 0, y = 0
+            v2.Point p2 = new v2.Point(1);    // x = 1, y = 0
+            v2.Point p3 = new v2.Point(1, 2); // x = 1, y = 2
+         }
+
+         // named arguments
+         {
+            v2.Point p1 = new v2.Point(x: 1, y: 2); // x = 1, y = 2
+            v2.Point p2 = new v2.Point(1, y: 2);    // x = 1, y = 2
+            v2.Point p3 = new v2.Point(x: 1, 2);    // x = 1, y = 2
+
+            v2.Point p4 = new v2.Point(y: 2);       // x = 0, y = 2
+            v2.Point p5 = new v2.Point(x: 1);       // x = 1, y = 0
+         }
+
          // partial classes
          {
             v18.Employee obj = new v18.Employee()
