@@ -70,6 +70,47 @@ namespace chapter_05
             Console.ReadLine();
          }
 
+         {
+            var objects = new List<v5.GameUnit>()
+            {
+               new v5.Water(new Position(3, 2)),
+               new v5.Water(new Position(4, 2)),
+               new v5.Water(new Position(5, 2)),
+               new v5.Hill(new Position(3, 1)),
+               new v5.Hill(new Position(5, 3)),
+            };
+
+            var surface = new v5.Surface();
+            surface.BeginDraw();
+
+            foreach (var unit in objects)
+               unit.Draw(surface);
+
+            Console.ReadLine();
+         }
+
+         {
+            var objects = new List<v5.GameUnit>()
+            {
+               new v5.Water(new Position(3, 2)),
+               new v5.Water(new Position(4, 2)),
+               new v5.Water(new Position(5, 2)),
+               new v5.Hill(new Position(3, 1)),
+               new v5.Hill(new Position(5, 3)),
+               new v5.Meeple(new Position(0, 0)),
+               new v5.Meeple(new Position(4, 3)),
+            };
+
+            var surface = new v5.Surface();
+            surface.BeginDraw();
+
+            foreach (var unit in objects)
+               unit.Draw(surface);
+
+            surface.EndDraw();
+            Console.ReadLine();
+         }
+
          EmployeeOverload employeeOverload = new EmployeeOverload();
          employeeOverload.FullName("William");
          employeeOverload.FullName("John", "Doe");

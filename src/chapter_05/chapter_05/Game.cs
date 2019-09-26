@@ -15,7 +15,6 @@ namespace chapter_05
 
    namespace v1
    {
-
       class Surface
       {
          private int left;
@@ -210,6 +209,109 @@ namespace chapter_05
          public Hill(Position position) : base(position) { }
 
          protected override char Image => '≡';
+      }
+   }
+
+   namespace v5
+   {
+      interface ISurface
+      {
+         void BeginDraw();
+         void EndDraw();
+         void DrawAt(char c, Position position);
+      }
+
+      class Surface : ISurface
+      {
+         private int left;
+         private int top;
+
+         public void BeginDraw()
+         {
+            Console.Clear();
+            left = Console.CursorLeft;
+            top = Console.CursorTop;
+         }
+
+         public void EndDraw()
+         {
+            Console.WriteLine();
+         }
+
+         public void DrawAt(char c, Position position)
+         {
+            try
+            {
+               Console.SetCursorPosition(left + position.X, top + position.Y);
+               Console.Write(c);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+               Console.Clear();
+               Console.WriteLine(e.Message);
+            }
+         }
+      }
+   }
+
+   namespace v5
+   {
+      abstract class GameUnit
+      {
+         public Position Position { get; protected set; }
+
+         public GameUnit(Position position)
+         {
+            Position = position;
+         }
+
+         public void Draw(v5.ISurface surface)
+         {
+            surface?.DrawAt(Image, Position);
+         }
+
+         protected abstract char Image { get; }
+      }
+
+      abstract class Terrain : GameUnit
+      {
+         public Terrain(Position position) : base(position) { }
+      }
+
+      class Water : Terrain
+      {
+         public Water(Position position) : base(position) { }
+
+         protected override char Image => '░';
+      }
+
+      class Hill : Terrain
+      {
+         public Hill(Position position) : base(position) { }
+
+         protected override char Image => '≡';
+      }
+
+      interface IMoveable
+      {
+         void MoveTo(Position pos);
+      }
+
+      abstract class ActionUnit : GameUnit, IMoveable
+      {
+         public ActionUnit(Position position) : base(position) { }
+
+         public void MoveTo(Position pos)
+         {
+            Position = pos;
+         }
+      }
+
+      class Meeple : ActionUnit
+      {
+         public Meeple(Position position) : base(position) { }
+
+         protected override char Image => 'M';
       }
    }
 }
