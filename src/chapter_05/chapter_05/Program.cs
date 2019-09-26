@@ -4,6 +4,16 @@ using System.Collections.Generic;
 
 namespace chapter_05
 {
+   class Base
+   {
+      public int Get() { return 42; }
+   }
+
+   class Derived : Base
+   {
+      public new int Get() { return 10; }
+   }
+
    class Program
    {
       static void Main(string[] args)
@@ -71,16 +81,16 @@ namespace chapter_05
          }
 
          {
-            var objects = new List<v5.GameUnit>()
+            var objects = new List<v6.GameUnit>()
             {
-               new v5.Water(new Position(3, 2)),
-               new v5.Water(new Position(4, 2)),
-               new v5.Water(new Position(5, 2)),
-               new v5.Hill(new Position(3, 1)),
-               new v5.Hill(new Position(5, 3)),
+               new v6.Water(new Position(3, 2)),
+               new v6.Water(new Position(4, 2)),
+               new v6.Water(new Position(5, 2)),
+               new v6.Hill(new Position(3, 1)),
+               new v6.Hill(new Position(5, 3)),
             };
 
-            var surface = new v5.Surface();
+            var surface = new v6.Surface();
             surface.BeginDraw();
 
             foreach (var unit in objects)
@@ -90,18 +100,18 @@ namespace chapter_05
          }
 
          {
-            var objects = new List<v5.GameUnit>()
+            var objects = new List<v6.GameUnit>()
             {
-               new v5.Water(new Position(3, 2)),
-               new v5.Water(new Position(4, 2)),
-               new v5.Water(new Position(5, 2)),
-               new v5.Hill(new Position(3, 1)),
-               new v5.Hill(new Position(5, 3)),
-               new v5.Meeple(new Position(0, 0)),
-               new v5.Meeple(new Position(4, 3)),
+               new v6.Water(new Position(3, 2)),
+               new v6.Water(new Position(4, 2)),
+               new v6.Water(new Position(5, 2)),
+               new v6.Hill(new Position(3, 1)),
+               new v6.Hill(new Position(5, 3)),
+               new v6.Meeple(new Position(0, 0)),
+               new v6.Meeple(new Position(4, 3)),
             };
 
-            var surface = new v5.Surface();
+            var surface = new v6.Surface();
             surface.BeginDraw();
 
             foreach (var unit in objects)
@@ -109,6 +119,14 @@ namespace chapter_05
 
             surface.EndDraw();
             Console.ReadLine();
+         }
+
+         {
+            Derived d = new Derived();
+            Console.WriteLine(d.Get()); // prints 10
+
+            Base b = d;
+            Console.WriteLine(b.Get()); // prints 42
          }
 
          EmployeeOverload employeeOverload = new EmployeeOverload();

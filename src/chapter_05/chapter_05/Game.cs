@@ -214,6 +214,52 @@ namespace chapter_05
 
    namespace v5
    {
+      abstract class GameUnit
+      {
+         public Position Position { get; protected set; }
+
+         public GameUnit(Position position)
+         {
+            Position = position;
+         }
+
+         public void Draw(v1.Surface surface)
+         {
+            surface.DrawAt(Image, Position);
+         }
+
+         protected abstract char Image { get; }
+      }
+
+      abstract class Terrain : GameUnit
+      {
+         public Terrain(Position position) : base(position) { }
+      }
+
+      class Water : Terrain
+      {
+         public Water(Position position) : base(position) { }
+
+         protected sealed override char Image => '░';
+      }
+      
+      class Lake : Water
+      {
+         public Lake(Position position) : base(position) { }
+
+         // protected sealed override char Image => '░'; // ERROR: cannot override sealed member
+      }
+
+      class Hill : Terrain
+      {
+         public Hill(Position position) : base(position) { }
+
+         protected override char Image => '≡';
+      }
+   }
+
+      namespace v6
+   {
       interface ISurface
       {
          void BeginDraw();
@@ -254,7 +300,7 @@ namespace chapter_05
       }
    }
 
-   namespace v5
+   namespace v6
    {
       abstract class GameUnit
       {
@@ -265,7 +311,7 @@ namespace chapter_05
             Position = position;
          }
 
-         public void Draw(v5.ISurface surface)
+         public void Draw(v6.ISurface surface)
          {
             surface?.DrawAt(Image, Position);
          }
