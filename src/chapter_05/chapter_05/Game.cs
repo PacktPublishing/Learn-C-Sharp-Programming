@@ -360,4 +360,52 @@ namespace chapter_05
          protected override char Image => 'M';
       }
    }
+
+   namespace v7
+   {
+      abstract class GameUnit
+      {
+         public Position Position { get; protected set; }
+
+         public GameUnit(Position position)
+         {
+            Position = position;
+         }
+
+         public void Draw(v6.ISurface surface)
+         {
+            surface?.DrawAt(Image, Position);
+         }
+
+         protected abstract char Image { get; }
+      }      
+
+      interface IMoveable
+      {
+         void MoveTo(Position pos);
+         void MoveTo(int x, int y);
+      }
+
+      abstract class ActionUnit : GameUnit, IMoveable
+      {
+         public ActionUnit(Position position) : base(position) { }
+
+         public void MoveTo(Position pos)
+         {
+            Position = pos;
+         }
+
+         public void MoveTo(int x, int y)
+         {
+            Position = new Position(x, y);
+         }
+      }
+
+      class Meeple : ActionUnit
+      {
+         public Meeple(Position position) : base(position) { }
+
+         protected override char Image => 'M';
+      }
+   }
 }

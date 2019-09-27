@@ -1,5 +1,4 @@
-﻿using chapter_05.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace chapter_05
@@ -12,6 +11,19 @@ namespace chapter_05
    class Derived : Base
    {
       public new int Get() { return 10; }
+   }
+
+   class Riddle<T>
+   {
+      public void Apply(T value) 
+      { 
+         Console.WriteLine($"T is {value}"); 
+      }
+
+      public void Apply(int value) 
+      { 
+         Console.WriteLine($"int is {value}"); 
+      }
    }
 
    class Program
@@ -138,62 +150,58 @@ namespace chapter_05
             Console.WriteLine(b.Get()); // prints 42
          }
 
-         EmployeeOverload employeeOverload = new EmployeeOverload();
-         employeeOverload.FullName("William");
-         employeeOverload.FullName("John", "Doe");
-         string FullName = employeeOverload.FullName("Harry", "James", "Potter");
-         Console.WriteLine("The full Name of Employee is {0}", FullName);
+         {
+            v7.Meeple m = new v7.Meeple(new Position(3, 4));
+            m.MoveTo(new Position(1, 1));
+            m.MoveTo(2, 5);
+         }
 
-         ComplexNumber complexNumber1 = new ComplexNumber(2, 3);
-         ComplexNumber complexNumber2 = new ComplexNumber(4, 5);
+         {
+            var r = new Riddle<int>();
+            r.Apply(42);
+         }
 
-         ComplexNumber complexNumber3 = complexNumber1 + complexNumber2;
-         ComplexNumber complexNumber4 = new ComplexNumber(5, 7);
-         complexNumber4++;
+         {
+            var c1 = new Complex(2, 3);
+            var c2 = new Complex(4, 5);
 
-         Console.WriteLine("The sum of given complex numbers is " + complexNumber3.Real + "+i" + complexNumber3.Imaginary);
-         Console.WriteLine("The complex number after applying increment will be " + complexNumber4.Real + "+i" + complexNumber4.Imaginary);
+            var c3 = c1 + c2;
+            var c4 = c1 - c2;
 
-         Car car = new Car("Jaguar", 4, "Automatic");
-         car.ShowDetails();
-         car.GetTransmission();
+            if (c3 == c2) { /* do something */}
+            if (c1 != c4) { /* do something else */}
 
-         Bicycle bicycle = new Bicycle("Atlas", 2);
-         bicycle.ShowDetails();
+            var c5 = new Complex(5, 7);
+            Console.WriteLine(c5);  // 5i + 7
 
-         Rectangle rectangle = new Rectangle(5, 3);
-         Console.WriteLine("The perimeter of Rectangle is {0}", rectangle.CalculatePerimeter());
+            c5++;
+            Console.WriteLine(c5);  // 6i + 7
 
-         Circle circle = new Circle(7);
-         Console.WriteLine("The perimeter of Rectangle is {0}", circle.CalculatePerimeter());
+            ++c5;
+            Console.WriteLine(c5);  // 7i + 7
+         }
 
-         CreditCard creditCard = new CreditCard(10000);
-         Console.WriteLine("The expense limit for Normal credit card is {0}", creditCard.CardLimit());
+         {
+            var c1 = new v2.Complex(5, 7);
+            var c2 = c1;
+            Console.WriteLine(c1);  // 5i + 7
+            Console.WriteLine(c2);  // 5i + 7
 
-         GoldCard goldCreditCard = new GoldCard(10000);
-         Console.WriteLine("The expense limit for Gold credit card is {0}", goldCreditCard.CardLimit());
+            c1++;
+            Console.WriteLine(c1);  // 6i + 7
+            Console.WriteLine(c2);  // 6i + 7
+         }
 
-         PlatinumCard platinumCreditCard = new PlatinumCard(10000);
-         Console.WriteLine("The expense limit for Platinum credit card is {0}", platinumCreditCard.CardLimit());
+         {
+            var c1 = new v3.Complex(5, 7);
+            var c2 = c1;
+            Console.WriteLine(c1);  // 5i + 7
+            Console.WriteLine(c2);  // 5i + 7
 
-         Movie movie = new Movie("Avengers", 10);
-         MovieRentalService movieRentalService = new MovieRentalService(movie.MovieName, movie.DaysRented);
-         movieRentalService.GetMovieDetails();
-         Console.WriteLine("The rent for movie is {0}", movieRentalService.CalculateRent());
-
-         Book book = new Book("Harry Potter", 15);
-         BookRentalService bookRentalService = new BookRentalService(book.BookName, book.DaysRented);
-         bookRentalService.GetBookDetails();
-         Console.WriteLine("The rent for book is {0}", bookRentalService.CalculateRent());
-
-         RentalService rentalService = new RentalService(book, movie);
-
-         rentalService.GetMovieDetails();
-         Console.WriteLine("The rent for movie is {0}", ((IMovie)rentalService).CalculateRent());
-         rentalService.GetBookDetails();
-         Console.WriteLine("The rent for book is {0}", ((IBook)rentalService).CalculateRent());
-
-         Console.ReadLine();
+            c1++;
+            Console.WriteLine(c1);  // 6i + 7
+            Console.WriteLine(c2);  // 5i + 7
+         }
       }
    }
 }
