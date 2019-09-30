@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace chapter_06
+﻿namespace chapter_06
 {
-    public class GenericDemo<T>
-    {
-        T GenProp { get; set; }
-        public GenericDemo(T genProp)
-        {
-            GenProp = genProp;
-        }
+   public class GenericDemo<T>
+   {
+      public T Value { get; private set; }
 
-        public void GetT()
-        {
-            Console.WriteLine("The value of T is " + GenProp);
-            Console.WriteLine("The type of T is " + typeof(T));
-        }
-    }
+      public GenericDemo(T value)
+      {
+         Value = value;
+      }
+
+      public override string ToString() => $"{typeof(T)} : {Value}";
+   }
 }

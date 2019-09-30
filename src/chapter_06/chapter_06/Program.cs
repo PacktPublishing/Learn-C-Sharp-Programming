@@ -1,47 +1,63 @@
 ﻿using System;
+using System.Linq;
 
 namespace chapter_06
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            GenericDemo<int> objGenericClass1 = new GenericDemo<int>(10);
-            objGenericClass1.GetT();
+   class Program
+   {
+      static void Main(string[] args)
+      {
+         {
+            var p1 = new Pair<int, int>(1, 2);
+            var p2 = new Pair<int, double>(1, 42.99);
+            var p3 = new Pair<string, bool>("true", true);
+         }
 
-            GenericDemo<string> objGenericClass2 = new GenericDemo<string>("Hello World");
-            objGenericClass2.GetT();
+         {
+            var obj1 = new GenericDemo<int>(10);
+            var obj2 = new GenericDemo<string>("Hello World");
 
-            Rectangle<int> rectangle1 = new Rectangle<int>(10, 20);
-            rectangle1.GetDimension();
+            var t1 = obj1.GetType();
+            Console.WriteLine(t1.Name);
+            Console.WriteLine(t1.GetGenericArguments().FirstOrDefault().Name);
+            var t2 = obj2.GetType();
+            Console.WriteLine(t2.Name);
+            Console.WriteLine(t2.GetGenericArguments().FirstOrDefault().Name);
 
-            Rectangle<double> rectangle2 = new Rectangle<double>(5.5, 7.5);
-            rectangle2.GetDimension();
+            Console.WriteLine(obj1);
+            Console.WriteLine(obj2);
+         }
 
-            Square objSquare = new Square(10);
-            Console.WriteLine("The area of square is " + objSquare.CalculateArea());
+         Rectangle<int> rectangle1 = new Rectangle<int>(10, 20);
+         rectangle1.GetDimension();
 
-            Circle objCircle = new Circle(7.5);
-            Console.WriteLine("The area of circle is " + objCircle.CalculateArea());
+         Rectangle<double> rectangle2 = new Rectangle<double>(5.5, 7.5);
+         rectangle2.GetDimension();
 
-            Employee employee = new Employee(10000, 500);
-            Console.WriteLine("The total salary of employee is " + employee.Add());
+         Square objSquare = new Square(10);
+         Console.WriteLine("The area of square is " + objSquare.CalculateArea());
 
-            Student student = new Student("John", "Doe");
-            Console.WriteLine("The full name of student is " + student.Add());
+         Circle objCircle = new Circle(7.5);
+         Console.WriteLine("The area of circle is " + objCircle.CalculateArea());
 
-            TestVehicle<Car> objCar = new TestVehicle<Car>(new Car());
-            objCar.GetVehicleType();
+         Employee employee = new Employee(10000, 500);
+         Console.WriteLine("The total salary of employee is " + employee.Add());
 
-            // TestVehicle<HangGlider> objHang = new TestVehicle<HangGlider>(new HangGlider()); // Compile-time error
+         Student student = new Student("John", "Doe");
+         Console.WriteLine("The full name of student is " + student.Add());
 
-            CompareObject compareObject = new CompareObject();
-            Console.WriteLine(compareObject.Compare<int>(10, 10));
-            Console.WriteLine(compareObject.Compare<double>(10.5, 10.8));
-            Console.WriteLine(compareObject.Compare<string>("a", "a"));
-            Console.WriteLine(compareObject.Compare<string>("a", "b"));
+         TestVehicle<Car> objCar = new TestVehicle<Car>(new Car());
+         objCar.GetVehicleType();
 
-            Console.ReadLine();
-        }
-    }
+         // TestVehicle<HangGlider> objHang = new TestVehicle<HangGlider>(new HangGlider()); // Compile-time error
+
+         CompareObject compareObject = new CompareObject();
+         Console.WriteLine(compareObject.Compare<int>(10, 10));
+         Console.WriteLine(compareObject.Compare<double>(10.5, 10.8));
+         Console.WriteLine(compareObject.Compare<string>("a", "a"));
+         Console.WriteLine(compareObject.Compare<string>("a", "b"));
+
+         Console.ReadLine();
+      }
+   }
 }
