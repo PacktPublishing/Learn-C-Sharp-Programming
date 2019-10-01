@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace chapter_06
@@ -34,11 +35,29 @@ namespace chapter_06
          Rectangle<double> rectangle2 = new Rectangle<double>(5.5, 7.5);
          rectangle2.GetDimension();
 
-         Square objSquare = new Square(10);
-         Console.WriteLine("The area of square is " + objSquare.CalculateArea());
+         {
+            v1.Square objSquare = new v1.Square(10);
+            Console.WriteLine($"The area of square is {objSquare.Area}");
 
-         Circle objCircle = new Circle(7.5);
-         Console.WriteLine("The area of circle is " + objCircle.CalculateArea());
+            v1.Circle objCircle = new v1.Circle(7.5);
+            Console.WriteLine($"The area of circle is {objCircle.Area}");
+         }
+
+         {
+            v2.Square objSquare = new v2.Square(10);
+            Console.WriteLine($"The area of square is {objSquare.Area}");
+
+            v2.Circle objCircle = new v2.Circle(7.5);
+            Console.WriteLine($"The area of circle is {objCircle.Area}");
+         }
+
+         {
+            v3.Square objSquare = new v3.Square(10);
+            Console.WriteLine($"The area of square is {objSquare.Area}");
+
+            v3.Circle objCircle = new v3.Circle(7.5);
+            Console.WriteLine($"The area of circle is {objCircle.Area}");
+         }
 
          Employee employee = new Employee(10000, 500);
          Console.WriteLine("The total salary of employee is " + employee.Add());
