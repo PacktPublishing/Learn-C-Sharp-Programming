@@ -59,6 +59,30 @@ namespace chapter_06
             Console.WriteLine($"The area of circle is {objCircle.Area}");
          }
 
+         {
+            IEnumerable<string> names = new List<string> { "Marius", "Ankit", "Raffaele" };
+            IEnumerable<object> objects = names;
+         }
+
+         {
+            List<string> names = new List<string> { "Marius", "Ankit", "Raffaele" };
+            //List<object> objects = names; // error
+         }
+
+         {
+            IEnumerable<int> numbers = new List<int> { 1, 1, 2, 3, 5, 8 };
+            //IEnumerable<object> objects = numbers; // error
+         }
+
+         {
+            v4.Square sqr1 = new v4.Square(4);
+            v4.Square sqr2 = new v4.Square(5);
+
+            v4.SquareComparison.IsBigger(sqr1, sqr2, new v4.SquareComparer());
+            v4.SquareComparison.IsBigger(sqr1, sqr2, new v4.ShapeComparer());
+            //v4.SquareComparison.IsBigger(sqr1, sqr2, new v4.CircleComparer());
+         }
+
          Employee employee = new Employee(10000, 500);
          Console.WriteLine("The total salary of employee is " + employee.Add());
 
