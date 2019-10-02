@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace chapter_06
+﻿namespace chapter_06
 {
    class Pair<T, U>
    {

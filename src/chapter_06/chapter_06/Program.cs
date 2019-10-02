@@ -29,12 +29,6 @@ namespace chapter_06
             Console.WriteLine(obj2);
          }
 
-         Rectangle<int> rectangle1 = new Rectangle<int>(10, 20);
-         rectangle1.GetDimension();
-
-         Rectangle<double> rectangle2 = new Rectangle<double>(5.5, 7.5);
-         rectangle2.GetDimension();
-
          {
             v1.Square objSquare = new v1.Square(10);
             Console.WriteLine($"The area of square is {objSquare.Area}");
@@ -83,24 +77,26 @@ namespace chapter_06
             //v4.SquareComparison.IsBigger(sqr1, sqr2, new v4.CircleComparer());
          }
 
-         Employee employee = new Employee(10000, 500);
-         Console.WriteLine("The total salary of employee is " + employee.Add());
+         {
+            CompareObjects comp = new CompareObjects();
+            Console.WriteLine(comp.Compare<int>(10, 10));
+            Console.WriteLine(comp.Compare<double>(10.5, 10.8));
+            Console.WriteLine(comp.Compare<string>("a", "a"));
+            Console.WriteLine(comp.Compare<string>("a", "b"));
+         }
 
-         Student student = new Student("John", "Doe");
-         Console.WriteLine("The full name of student is " + student.Add());
+         {
+            CompareObjects comp = new CompareObjects();
+            Console.WriteLine(comp.Compare(10, 10));
+            Console.WriteLine(comp.Compare(10.5, 10.8));
+            Console.WriteLine(comp.Compare("a", "a"));
+            Console.WriteLine(comp.Compare("a", "b"));
+         }
 
-         TestVehicle<Car> objCar = new TestVehicle<Car>(new Car());
-         objCar.GetVehicleType();
-
-         // TestVehicle<HangGlider> objHang = new TestVehicle<HangGlider>(new HangGlider()); // Compile-time error
-
-         CompareObject compareObject = new CompareObject();
-         Console.WriteLine(compareObject.Compare<int>(10, 10));
-         Console.WriteLine(compareObject.Compare<double>(10.5, 10.8));
-         Console.WriteLine(compareObject.Compare<string>("a", "a"));
-         Console.WriteLine(compareObject.Compare<string>("a", "b"));
-
-         Console.ReadLine();
+         {
+            CompareObjects comp = new CompareObjects();
+            Console.WriteLine(comp.Compare<short>(10, 10));
+         }
       }
    }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace chapter_06
+﻿namespace chapter_06
 {
-    class CompareObject
+    class CompareObjects
     {
         public bool Compare<T>(T input1, T input2)
         {
