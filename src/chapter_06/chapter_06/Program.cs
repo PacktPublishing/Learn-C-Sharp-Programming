@@ -97,6 +97,28 @@ namespace chapter_06
             CompareObjects comp = new CompareObjects();
             Console.WriteLine(comp.Compare<short>(10, 10));
          }
+
+         {
+            v1.Point<int> p1 = new v1.Point<int>(3, 4);
+            v1.Point<double> p2 = new v1.Point<double>(3.12, 4.55);
+            v1.Point<bool> p3 = new v1.Point<bool>(true, false);
+            v1.Point<string> p4 = new v1.Point<string>("alpha", "beta");
+         }
+
+         {
+            v2.Point<int> p1 = new v2.Point<int>(3, 4);
+            v2.Point<double> p2 = new v2.Point<double>(3.12, 4.55);
+            // v2.Point<bool> p3 = new v2.Point<bool>(true, false);
+            // v2.Point<string> p4 = new v2.Point<string>("alpha", "beta");
+         }
+
+         {
+            var dictionary = new RestrictedDictionary<v5.ShapeType, v5.Shape>();
+            var c = dictionary.Make<v5.Circle>(v5.ShapeType.Rounded);
+            var e = dictionary.Make<v5.Ellipsis>(v5.ShapeType.Rounded);
+            var r = dictionary.Make<v5.Rectangle>(v5.ShapeType.Sharp);
+            var s = dictionary.Make<v5.Square>(v5.ShapeType.Sharp);
+         }
       }
    }
 }

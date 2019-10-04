@@ -196,4 +196,19 @@ namespace chapter_06
          }
       }
    }
+
+   namespace v5
+   {
+      enum ShapeType
+      {
+         Sharp,
+         Rounded
+      };
+
+      class Shape { }
+      class Ellipsis : Shape { }
+      class Circle : Shape { }
+      class Rectangle : Shape { }
+      class Square : Shape { }
+   }
 }
