@@ -147,11 +147,64 @@ namespace chapter_07
          }
       }
 
+      static void LinkedListDemo()
+      {
+         {
+            var arr = new string[] { "Ankit", "Marius", "Raffaele" };
+            var words = new LinkedList<string>(arr);
+            var numbers = new LinkedList<int>();
+         }
+
+         {
+            var numbers = new LinkedList<int>();
+            var n2 = numbers.AddFirst(2);      // 2
+            PrintCollection(numbers);
+
+            var n1 = numbers.AddFirst(1);      // 1 2
+            PrintCollection(numbers);
+
+            var n7 = numbers.AddLast(7);       // 1 2 7
+            PrintCollection(numbers);
+
+            var n11 = numbers.AddLast(11);     // 1 2 7 11
+            PrintCollection(numbers);
+
+            var n3 = numbers.AddAfter(n2, 3);  // 1 2 3 7 11
+            PrintCollection(numbers);
+
+            var n5 = numbers.AddBefore(n7, 5); // 1 2 3 5 7 11
+            PrintCollection(numbers);
+
+            var fn1 = numbers.Find(5);
+            var fn2 = numbers.FindLast(5);
+            Console.WriteLine(fn1 == fn2);
+
+            Console.WriteLine(numbers.Contains(3));
+            Console.WriteLine(numbers.Contains(13));
+
+            numbers.RemoveFirst();             // 2 3 5 7 11
+            PrintCollection(numbers);
+
+            numbers.RemoveLast();              // 2 3 5 7
+            PrintCollection(numbers);
+
+            numbers.Remove(3);                 // 2 5 7
+            PrintCollection(numbers);
+
+            numbers.Remove(n5);                // 2 7
+            PrintCollection(numbers);
+
+            numbers.Clear();                   // empty
+            PrintCollection(numbers);
+         }
+      }
+
       static void Main(string[] args)
       {
          //ListDemo();
          //StackDemo();
-         QueueDemo();
+         //QueueDemo();
+         LinkedListDemo();
       }
    }
 }
