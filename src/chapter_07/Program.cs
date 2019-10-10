@@ -10,7 +10,7 @@ namespace chapter_07
          foreach (var e in collection)
             Console.Write($"{e} ");
          Console.WriteLine();
-      }
+      }     
 
       static void ListDemo()
       {
@@ -28,54 +28,130 @@ namespace chapter_07
 
          {
             var numbers = new List<int> { 1, 2, 3 };
-            numbers.Add(5);
-            numbers.Add(7);
-            numbers.Add(11);
+            numbers.Add(5);       // 1  2  3  5
+            numbers.AddRange(new int[] { 7, 11 });
+                                  // 1  2  3  5  7 11
+            numbers.Insert(5, 1); // 1  2  3  5  7  1 11
+            numbers.Insert(5, 1); // 1  2  3  5  7  1  1 11
+            numbers.InsertRange(1, new int[] { 13, 17, 19 });
+                                  // 1 13 17 19  2  3  5  7  1  1 11
+
             Console.WriteLine($"Size: {numbers.Count}");
             PrintCollection(numbers);
 
-            var index = numbers.IndexOf(5);
-            Console.WriteLine($"IndexOf(5): {index}");
-
-            numbers.RemoveAt(index);
-            Console.WriteLine($"Size: {numbers.Count}");
+            numbers.Remove(1);              // 13 17 19  2  3  5  7  1  1 11
             PrintCollection(numbers);
 
-            numbers.Insert(0, 13);
-            Console.WriteLine($"Size: {numbers.Count}");
+            numbers.RemoveRange(2, 3);      // 13 17  5  7  1  1 11
             PrintCollection(numbers);
 
-            numbers.Sort();
+            numbers.RemoveAll(e => e < 10); // 13 17 11
             PrintCollection(numbers);
 
-            numbers.Reverse();
+            numbers.RemoveAt(1);            // 13 11
+            PrintCollection(numbers);
+
+            numbers.Clear();                // 
+            PrintCollection(numbers);
+         }
+
+         {
+            var numbers = new List<int> { 1, 2, 3, 5, 7, 11 };
+
+            var a = numbers.Find(e => e < 10);     // 1
+            var b = numbers.FindLast(e => e < 10); // 7
+            var c = numbers.FindAll(e => e < 10);  // 1 2 3 5 7
+         }
+
+         {
+            var numbers = new List<int> { 1, 1, 2, 3, 5, 8, 11 };
+
+            var a = numbers.FindIndex(e => e < 10);     // 0
+            var b = numbers.FindLastIndex(e => e < 10); // 5
+            var c = numbers.IndexOf(5);                 // 4
+            var d = numbers.LastIndexOf(1);             // 1
+            var e = numbers.BinarySearch(8);            // 5
+         }
+
+         {
+            var numbers = new List<int> { 1, 5, 3, 11, 8, 1, 2 };
+
+            numbers.Sort();     // 1 1 2 3 5 8 11
+            numbers.Reverse();  // 11 8 5 3 2 1 1
+         }
+      }
+
+      static void StackDemo()
+      {
+         {
+            var arr = new string[] { "Ankit", "Marius", "Raffaele" };
+            Stack<string> names = new Stack<string>(arr);
+
+            Stack<int> numbers = new Stack<int>();
+         }
+
+         {
+            Stack<int> numbers = new Stack<int>(new int[]{ 1, 2, 3 });
+            PrintCollection(numbers);  // 3 2 1
+
+            numbers.Push(5);           // 5 3 2 1
+            PrintCollection(numbers);
+
+            numbers.Push(7);           // 7 5 3 2 1
+            PrintCollection(numbers);
+
+            numbers.Pop();             // 5 3 2 1
+            PrintCollection(numbers);
+
+            var n = numbers.Peek();    // 5 3 2 1
+            PrintCollection(numbers);
+
+            numbers.Push(11);          // 11 5 3 2 1
+            PrintCollection(numbers);
+
+            numbers.Clear();           // empty
+            PrintCollection(numbers);
+         }
+      }
+
+      static void QueueDemo()
+      {
+         {
+            var arr = new string[] { "Ankit", "Marius", "Raffaele" };
+            Queue<string> names = new Queue<string>(arr);
+
+            Queue<int> numbers = new Queue<int>();
+         }
+
+         {
+            Queue<int> numbers = new Queue<int>(new int[] { 1, 2, 3 });
+            PrintCollection(numbers);  // 1 2 3
+
+            numbers.Enqueue(5);        // 1 2 3 5
+            PrintCollection(numbers);
+
+            numbers.Enqueue(7);        // 1 2 3 5 7
+            PrintCollection(numbers);
+
+            numbers.Dequeue();         // 2 3 5 7
+            PrintCollection(numbers);
+
+            var n = numbers.Peek();    // 2 3 5 7
+            PrintCollection(numbers);
+
+            numbers.Enqueue(11);       // 2 3 5 7 11
+            PrintCollection(numbers);
+
+            numbers.Clear();           // empty
             PrintCollection(numbers);
          }
       }
 
       static void Main(string[] args)
       {
-         ListDemo();
-
-         ListDemo lstDemo = new ListDemo();
-         lstDemo.ShowListOperations();
-
-         StackDemo stackDemo = new StackDemo();
-         stackDemo.ShowStackOperations();
-
-         QueueDemo queueDemo = new QueueDemo();
-         queueDemo.ShowQueueOperations();
-
-         LinkedListDemo linkedListDemo = new LinkedListDemo();
-         linkedListDemo.ShowLinkedListOperations();
-
-         DictionaryDemo dictionaryDemo = new DictionaryDemo();
-         dictionaryDemo.ShowDictionaryOperations();
-
-         HashSetDemo hashSetDemo = new HashSetDemo();
-         hashSetDemo.ShowHashSetOperations();
-
-         Console.ReadLine();
+         //ListDemo();
+         //StackDemo();
+         QueueDemo();
       }
    }
 }
