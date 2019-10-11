@@ -208,9 +208,9 @@ namespace chapter_07
          {
             Dictionary<int, string> languages = new Dictionary<int, string>()
             {
-               {1, "C#"}, 
-               {2, "Java"}, 
-               {3, "Python"}, 
+               {1, "C#"},
+               {2, "Java"},
+               {3, "Python"},
                {4, "C++"}
             };
          }
@@ -255,7 +255,7 @@ namespace chapter_07
             else
                Console.WriteLine("Not found!");
 
-            foreach(var kvp in languages)
+            foreach (var kvp in languages)
             {
                Console.WriteLine($"[{kvp.Key}] = {kvp.Value}");
             }
@@ -268,13 +268,80 @@ namespace chapter_07
          }
       }
 
+      static void SetDemo()
+      {
+         {
+            HashSet<int> numbers = new HashSet<int>();
+         }
+
+         {
+            HashSet<int> numbers = new HashSet<int>()
+            {
+               1, 1, 2, 3, 5, 8, 11
+            };
+         }
+
+         {
+            HashSet<int> numbers = new HashSet<int>() { 11, 3, 8 };
+            numbers.Add(1);
+            numbers.Add(1);
+            numbers.Add(2);
+            numbers.Add(5);
+            PrintCollection(numbers);
+
+            Console.WriteLine(numbers.Contains(1));
+            Console.WriteLine(numbers.Contains(7));
+
+            numbers.Remove(1);
+            PrintCollection(numbers);
+
+            numbers.RemoveWhere(n => n % 2 == 0);
+            PrintCollection(numbers);
+
+            numbers.Clear();
+            PrintCollection(numbers);
+         }
+
+         {
+            HashSet<int> a = new HashSet<int>() { 1, 2, 5, 6, 9};
+            HashSet<int> b = new HashSet<int>() { 1, 2, 3, 4};
+
+            var s1 = new HashSet<int>(a);
+            s1.IntersectWith(b);
+            PrintCollection(s1);
+
+            var s2 = new HashSet<int>(a);
+            s2.UnionWith(b);
+            PrintCollection(s2);
+
+            var s3 = new HashSet<int>(a);
+            s3.ExceptWith(b);
+            PrintCollection(s3);
+
+            var s4 = new HashSet<int>(a);
+            s4.SymmetricExceptWith(b);
+            PrintCollection(s4);
+         }
+
+         {
+            HashSet<int> a = new HashSet<int>() { 1, 2, 5, 6, 9 };
+            HashSet<int> b = new HashSet<int>() { 1, 2, 3, 4 };
+            HashSet<int> c = new HashSet<int>() { 2, 5 };
+
+            Console.WriteLine(a.Overlaps(b));
+            Console.WriteLine(a.IsSupersetOf(c));
+            Console.WriteLine(c.IsSubsetOf(a));
+         }
+      }
+
       static void Main(string[] args)
       {
-         //ListDemo();
-         //StackDemo();
-         //QueueDemo();
-         //LinkedListDemo();
+         ListDemo();
+         StackDemo();
+         QueueDemo();
+         LinkedListDemo();
          DictionaryDemo();
+         SetDemo();
       }
    }
 }
