@@ -199,12 +199,82 @@ namespace chapter_07
          }
       }
 
+      static void DictionaryDemo()
+      {
+         {
+            Dictionary<int, string> languages = new Dictionary<int, string>();
+         }
+
+         {
+            Dictionary<int, string> languages = new Dictionary<int, string>()
+            {
+               {1, "C#"}, 
+               {2, "Java"}, 
+               {3, "Python"}, 
+               {4, "C++"}
+            };
+         }
+
+         {
+            Dictionary<int, string> languages = new Dictionary<int, string>()
+            {
+               [1] = "C#",
+               [2] = "Java",
+               [3] = "Python",
+               [4] = "C++"
+            };
+         }
+
+         {
+            Dictionary<int, string> languages = new Dictionary<int, string>()
+            {
+               {1, "C#"},
+               {2, "Java"},
+               {3, "Python"},
+               {4, "C++"}
+            };
+            PrintCollection(languages);
+
+            languages.Add(5, "JavaScript");
+            PrintCollection(languages);
+
+            languages.TryAdd(5, "JavaScript");
+            PrintCollection(languages);
+
+            languages[6] = "F#";
+            PrintCollection(languages);
+
+            languages[5] = "TypeScript";
+            PrintCollection(languages);
+
+            Console.WriteLine($"Has 5:  {languages.ContainsKey(5)}");
+            Console.WriteLine($"Has C#: {languages.ContainsValue("C#")}");
+
+            if (languages.TryGetValue(1, out string lang))
+               Console.WriteLine(lang);
+            else
+               Console.WriteLine("Not found!");
+
+            foreach(var kvp in languages)
+            {
+               Console.WriteLine($"[{kvp.Key}] = {kvp.Value}");
+            }
+
+            languages.Remove(5);
+            PrintCollection(languages);
+
+            languages.Clear();
+            PrintCollection(languages);
+         }
+      }
+
       static void Main(string[] args)
       {
          //ListDemo();
          //StackDemo();
          //QueueDemo();
-         LinkedListDemo();
+         //LinkedListDemo();
+         DictionaryDemo();
       }
    }
 }
