@@ -41,6 +41,42 @@ namespace chapter_13_01
             Console.WriteLine(path2);
             File.Delete(path2);
          }
+
+         {
+            var dir = new DirectoryInfo(@"c:\Program Files (x86)\Microsoft SDKs\Windows\");
+
+            Console.WriteLine($"Full name : {dir.FullName}");
+            Console.WriteLine($"Name      : {dir.Name}");
+            Console.WriteLine($"Parent    : {dir.Parent}");
+            Console.WriteLine($"Root      : {dir.Root}");
+            Console.WriteLine($"Created   : {dir.CreationTime}");
+            Console.WriteLine($"Attributes: {dir.Attributes}");
+
+            foreach(var subdir in dir.EnumerateDirectories())
+            {
+               Console.WriteLine(subdir.Name);
+            }
+         }
+
+         {
+            var dir = new DirectoryInfo(@"C:\Temp\Dir\Sub");
+            Console.WriteLine($"Exists: {dir.Exists}");
+            dir.Create();
+
+            var sub = dir.CreateSubdirectory(@"sub1\sub2\sub3");
+            Console.WriteLine(sub.FullName);
+
+            sub.Delete();
+            Console.WriteLine($"Exists: {dir.Exists}");
+         }
+
+         {
+            var dir = new DirectoryInfo(@"c:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\");
+            foreach(var file in dir.GetFiles("t*.exe"))
+            {
+               Console.WriteLine($"{file.Name} [{file.Length}] [{file.Attributes}]");
+            }
+         }
       }
    }
 }
