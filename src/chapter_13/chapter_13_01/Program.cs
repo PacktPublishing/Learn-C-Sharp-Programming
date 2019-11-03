@@ -5,6 +5,29 @@ namespace chapter_13_01
 {
    class Program
    {
+      static void PrintContent(string path, string indent = null)
+      {
+         try
+         {
+            foreach(var file in Directory.GetFiles(path))
+            {
+               var fi = new FileInfo(file);
+               Console.WriteLine($"{indent}{fi.Name}");
+            }
+
+            foreach(var dir in Directory.GetDirectories(path))
+            {
+               var di = new DirectoryInfo(dir);
+               Console.WriteLine($"{indent}[{di.Name}]");
+               PrintContent(dir, indent + "  ");
+            }
+         }
+         catch(Exception ex)
+         {
+            Console.Error.WriteLine(ex.Message);
+         }
+      }
+
       static void Main(string[] args)
       {
          {
@@ -43,7 +66,7 @@ namespace chapter_13_01
          }
 
          {
-            var dir = new DirectoryInfo(@"c:\Program Files (x86)\Microsoft SDKs\Windows\");
+            var dir = new DirectoryInfo(@"C:\Program Files (x86)\Microsoft SDKs\Windows\");
 
             Console.WriteLine($"Full name : {dir.FullName}");
             Console.WriteLine($"Name      : {dir.Name}");
@@ -67,15 +90,43 @@ namespace chapter_13_01
             Console.WriteLine(sub.FullName);
 
             sub.Delete();
-            Console.WriteLine($"Exists: {dir.Exists}");
          }
 
          {
-            var dir = new DirectoryInfo(@"c:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\");
+            var dir = new DirectoryInfo(@"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\");
             foreach(var file in dir.GetFiles("t*.exe"))
             {
                Console.WriteLine($"{file.Name} [{file.Length}] [{file.Attributes}]");
             }
+         }
+
+         {
+            var path = @"C:\Temp\Dir\Sub";
+            Console.WriteLine($"Exists: {Directory.Exists(path)}");
+            Directory.CreateDirectory(path);
+
+            var sub = Path.Combine(path, @"sub1\sub2\sub3");
+            Directory.CreateDirectory(sub);
+
+            Directory.Delete(sub);
+            Directory.Delete(path, true);
+         }
+
+         {
+            var file = new FileInfo(@"C:\Windows\explorer.exe");
+
+            Console.WriteLine($"Name:       {file.Name}");
+            Console.WriteLine($"Extension:  {file.Extension}");
+            Console.WriteLine($"Full name:  {file.FullName}");
+            Console.WriteLine($"Length:     {file.Length}");
+            Console.WriteLine($"Attributes: {file.Attributes}");
+            Console.WriteLine($"Creation:   {file.CreationTime}");
+            Console.WriteLine($"Last access:{file.LastAccessTime}");
+            Console.WriteLine($"Last write: {file.LastWriteTime}");
+         }
+
+         {
+            PrintContent(@".\..\..\..\");
          }
       }
    }
