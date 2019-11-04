@@ -9,13 +9,13 @@ namespace chapter_13_01
       {
          try
          {
-            foreach(var file in Directory.GetFiles(path))
+            foreach(var file in Directory.EnumerateFiles(path))
             {
                var fi = new FileInfo(file);
                Console.WriteLine($"{indent}{fi.Name}");
             }
 
-            foreach(var dir in Directory.GetDirectories(path))
+            foreach(var dir in Directory.EnumerateDirectories(path))
             {
                var di = new DirectoryInfo(dir);
                Console.WriteLine($"{indent}[{di.Name}]");
@@ -127,6 +127,23 @@ namespace chapter_13_01
 
          {
             PrintContent(@".\..\..\..\");
+         }
+
+         {
+            var path = @"C:\Temp\Dir\demo.txt";
+            using (var file = new StreamWriter(File.Create(path)))
+            {
+               file.Write("This is a demo");
+            }
+
+            File.WriteAllText(path, "This is a demo");
+            File.AppendAllText(path, "1st line");
+            File.AppendAllLines(path, new string[]{ "2nd line", "3rd line"});
+
+            string text = File.ReadAllText(path);
+            string[] lines = File.ReadAllLines(path);
+
+            File.Delete(path);
          }
       }
    }
