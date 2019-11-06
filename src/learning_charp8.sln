@@ -87,7 +87,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "chapter_13", "chapter_13", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "chapter_13_01", "chapter_13\chapter_13_01\chapter_13_01.csproj", "{10CFA4B8-19A7-4EAD-AC57-341A101FBE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter_13_02", "chapter_13\chapter_13_02\chapter_13_02.csproj", "{B8418932-37E2-4DE7-B70E-2630EF5DFD71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "chapter_13_02", "chapter_13\chapter_13_02\chapter_13_02.csproj", "{B8418932-37E2-4DE7-B70E-2630EF5DFD71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter_13_03", "chapter_13\chapter_13_03\chapter_13_03.csproj", "{62B5DB73-C3DD-4A2E-976D-6128C10509F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +221,10 @@ Global
 		{B8418932-37E2-4DE7-B70E-2630EF5DFD71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8418932-37E2-4DE7-B70E-2630EF5DFD71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8418932-37E2-4DE7-B70E-2630EF5DFD71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62B5DB73-C3DD-4A2E-976D-6128C10509F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62B5DB73-C3DD-4A2E-976D-6128C10509F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62B5DB73-C3DD-4A2E-976D-6128C10509F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62B5DB73-C3DD-4A2E-976D-6128C10509F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -255,6 +261,7 @@ Global
 		{63731215-2287-4F13-82C1-C8A3817F53EF} = {0DB6E973-6496-4B49-982C-048922139F08}
 		{10CFA4B8-19A7-4EAD-AC57-341A101FBE96} = {16C48A18-D3FA-430E-AC3D-89167F466EEC}
 		{B8418932-37E2-4DE7-B70E-2630EF5DFD71} = {16C48A18-D3FA-430E-AC3D-89167F466EEC}
+		{62B5DB73-C3DD-4A2E-976D-6128C10509F9} = {16C48A18-D3FA-430E-AC3D-89167F466EEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C2A078BD-046F-40DD-858E-CFCF14F3926D}
