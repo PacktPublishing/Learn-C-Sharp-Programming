@@ -77,8 +77,7 @@ namespace chapter_13_05
             var path = Path.Combine(Path.GetTempPath() + "employee.json");
             var options = new JsonWriterOptions()
             {
-               Indented = true,
-
+               Indented = true
             };
 
             using (var sw = File.CreateText(path))
@@ -97,7 +96,7 @@ namespace chapter_13_05
             Console.WriteLine(text);
 
             byte[] data = Encoding.UTF8.GetBytes(text);
-            Utf8JsonReader reader = new Utf8JsonReader(data, isFinalBlock: true, state: default);
+            Utf8JsonReader reader = new Utf8JsonReader(data, true, default);
 
             while (reader.Read())
             {
