@@ -32,7 +32,7 @@ namespace chapter_17_tests
          var rectangle = new Rectangle(1, 2, 3, 4);
          Assert.AreEqual(2, rectangle.Width, "With must be 2");
          Assert.AreEqual(2, rectangle.Height, "Height must be 2");
-         Assert.AreEqual(4, rectangle.Area, "Area must be 4");         
+         Assert.AreEqual(4, rectangle.Area, "Area must be 4");
       }
 
       [TestMethod]

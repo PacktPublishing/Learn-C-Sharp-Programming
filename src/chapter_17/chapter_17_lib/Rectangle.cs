@@ -33,7 +33,7 @@ namespace chapter_17_lib
       public static Rectangle Deflate(this Rectangle r, int left, int top, int right, int bottom) =>
          new Rectangle(r.Left - left, r.Top - top, r.Right - right, r.Bottom - bottom);
 
-      public static Rectangle Interset(this Rectangle a, Rectangle b)
+      public static Rectangle Intersect(this Rectangle a, Rectangle b)
       {
          int l = Math.Max(a.Left, b.Left);
          int r = Math.Min(a.Right, b.Right);
