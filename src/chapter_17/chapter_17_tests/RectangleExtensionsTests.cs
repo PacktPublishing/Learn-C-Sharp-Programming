@@ -79,6 +79,4 @@ namespace chapter_17_tests
          Assert.AreEqual(0, intersection3.Bottom);
       }
    }
-
-
 }

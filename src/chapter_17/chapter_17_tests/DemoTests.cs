@@ -3,7 +3,7 @@
 namespace chapter_17_tests
 {
    [TestClass]
-   public class YourUnitTests
+   public class UnitTestsClass
    {
       [AssemblyInitialize]
       public static void AssemblyInit(TestContext context)
