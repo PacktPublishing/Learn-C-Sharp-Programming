@@ -8,13 +8,7 @@ namespace chapter_17_tests_netframework
    [TestClass]
    public class RectangleDataDrivenTests
    {
-      private static TestContext _tc;
-
-      [ClassInitialize]
-      public static void Initialization(TestContext testContext)
-      {
-         _tc = testContext;
-      }
+      public TestContext TestContext { get; set; }
 
       [DataTestMethod]
       [DataRow(true, 3, 4, 5, 6)]
@@ -58,11 +52,11 @@ namespace chapter_17_tests_netframework
       {
          var rectangle = new Rectangle(1, 2, 10, 12);
 
-         bool result = Convert.ToBoolean(_tc.DataRow["Expected"]);
-         int left = Convert.ToInt32(_tc.DataRow["left"]);
-         int top = Convert.ToInt32(_tc.DataRow["top"]);
-         int right = Convert.ToInt32(_tc.DataRow["right"]);
-         int bottom = Convert.ToInt32(_tc.DataRow["bottom"]);
+         bool result = Convert.ToBoolean(TestContext.DataRow["Expected"]);
+         int left = Convert.ToInt32(TestContext.DataRow["left"]);
+         int top = Convert.ToInt32(TestContext.DataRow["top"]);
+         int right = Convert.ToInt32(TestContext.DataRow["right"]);
+         int bottom = Convert.ToInt32(TestContext.DataRow["bottom"]);
 
          Assert.AreEqual(
             result,
