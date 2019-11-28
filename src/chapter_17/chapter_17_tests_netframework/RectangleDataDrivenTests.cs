@@ -63,5 +63,23 @@ namespace chapter_17_tests_netframework
             rectangle.IntersectsWith(
                new Rectangle(left, top, right, bottom)));
       }
+
+      [DataTestMethod]
+      [DataSource("MyCSVDataSource")]
+      public void TestIntersectsWith_CsvData_AppSettings()
+      {
+         var rectangle = new Rectangle(1, 2, 10, 12);
+
+         bool result = Convert.ToBoolean(TestContext.DataRow["Expected"]);
+         int left = Convert.ToInt32(TestContext.DataRow["left"]);
+         int top = Convert.ToInt32(TestContext.DataRow["top"]);
+         int right = Convert.ToInt32(TestContext.DataRow["right"]);
+         int bottom = Convert.ToInt32(TestContext.DataRow["bottom"]);
+
+         Assert.AreEqual(
+            result,
+            rectangle.IntersectsWith(
+               new Rectangle(left, top, right, bottom)));
+      }
    }
 }
