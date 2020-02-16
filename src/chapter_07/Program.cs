@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace chapter_07
 {
@@ -334,6 +336,46 @@ namespace chapter_07
          }
       }
 
+      static async Task BlockingCollectionDemo()
+      {
+         using var bc = new BlockingCollection<int>();
+
+         using var producer = Task.Run(() => {
+            int a = 1, b = 1;
+            bc.Add(a);
+            bc.Add(b);
+            for(int i = 0; i < 10; ++i)
+            {
+               int c = a + b;
+               bc.Add(c);
+               a = b;
+               b = c;
+            }
+            bc.CompleteAdding();
+         });
+         
+         using var consumer1 = Task.Run(() => { 
+            try
+            {
+               while (true)
+                  Console.WriteLine($"[1] {bc.Take()}");
+            }
+            catch (InvalidOperationException)
+            {
+               Console.WriteLine("[1] collection completed");
+            }
+            Console.WriteLine("[1] work done");
+         });
+
+         using var consumer2 = Task.Run(() => {
+            foreach(var n in bc.GetConsumingEnumerable())
+               Console.WriteLine($"[2] {n}");
+            Console.WriteLine("[2] work done");
+         });
+
+         await Task.WhenAll(producer, consumer1, consumer2);
+      }
+
       static void Main(string[] args)
       {
          ListDemo();
@@ -342,6 +384,7 @@ namespace chapter_07
          LinkedListDemo();
          DictionaryDemo();
          SetDemo();
+         BlockingCollectionDemo().Wait();
       }
    }
 }
