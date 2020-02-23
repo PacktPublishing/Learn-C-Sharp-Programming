@@ -1,0 +1,52 @@
+﻿<Window x:Class="chapter_12_03_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:chapter_12_03_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15" />
+            <Setter Property="MinWidth" Value="90" />
+        </Style>
+
+        <local:ImageConverter x:Key="ImageConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button Click="btWriteFile1_Click" Content="Write File 1" x:Name="btWriteFile1" />
+                <Button Click="btWriteFile2_Click" Content="Write File 2" x:Name="btWriteFile2" />
+                <Button Click="btDownload_Click" Content="Download"/>
+            </StackPanel>
+        </WrapPanel>
+
+        <TextBlock x:Name="message" Grid.Row="1" />
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl x:Name="icContainer">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="3">
+                            <Image Source="{Binding Path=Blob, Converter={StaticResource ImageConverter}}"
+                               MaxWidth="150" Stretch="Uniform" Margin="0,0,0,5" />
+                            <TextBlock Text="{Binding Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>
