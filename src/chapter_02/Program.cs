@@ -152,14 +152,14 @@ spawns multiple lines.";
          }
 
          {
-            int x = 42;
-            object o = x;   // boxing
+            int a = 42;
+            object o = a;   // boxing
 
             o = 43;
-            int y = (int)o; // unboxing
+            int b = (int)o; // unboxing
 
-            Console.WriteLine(x);  // 42
-            Console.WriteLine(y);  // 43
+            Console.WriteLine(a);  // 42
+            Console.WriteLine(b);  // 43
          }
 
          {
