@@ -13,6 +13,26 @@ namespace chapter_05
       public new int Get() { return 10; }
    }
 
+   class Pet
+   {
+      public string Name { get; private set; }
+
+      public Pet(string name)
+      { Name = name; }
+
+      public Pet Clone() { return new Pet(Name); }
+   }
+
+   class Dog : Pet
+   {
+      public string Color { get; private set; }
+
+      public Dog(string name, string color):base(name)
+      { Color = color; }
+
+      public new Dog Clone() { return new Dog(Name, Color); }
+   }
+
    class Riddle<T>
    {
       public void Apply(T value) 
@@ -201,6 +221,17 @@ namespace chapter_05
             c1++;
             Console.WriteLine(c1);  // 6i + 7
             Console.WriteLine(c2);  // 5i + 7
+         }
+
+         {
+            Pet pet = new Pet("Lola");
+            Dog dog = new Dog("Rex", "black");
+
+            Pet cpet = pet.Clone();
+            Dog ddog = dog.Clone();
+
+            // Pet another = new Dog("Dark", "white");
+            // Dog copy = another.Clone(); // ERROR this methods returns a Pet 
          }
       }
    }
