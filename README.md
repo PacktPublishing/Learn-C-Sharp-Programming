@@ -9,13 +9,16 @@ Published by [Packt](https://github.com/PacktPublishing)
 
 The source code is located in the *src* folder.
 
-For each chapter, there is a subfolder here with the name chapter_*number* (e.g. chapter_02, chapter_03, etc.)
-For each different topic in a chapter, there is a different project. For instance:
+For each chapter, there is a subfolder here with the name chapter_*number* (e.g. chapter_01, chapter_02, chapter_03, etc.)
+Some chapters are split in multiple projects, one for each topic. For instance:
 
-* chapter_07\chapter_07_01 - Delegates and Events
-* chapter_07\chapter_07_02 - Tuples
-* chapter_07\chapter_07_03 - Pattern matching
-* chapter_07\chapter_07_04 - Regular expressions
+* chapter_01\chapter_01 - Hello World program
+* chapter_02\chapter_02 - Data types, variables, constants, arrays, nullables, type conversions, operators
+* chapter_08\chapter_08_01 - Delegates and Events
+* chapter_08\chapter_08_02 - Tuples
+* chapter_08\chapter_08_03 - Pattern matching
+* chapter_08\chapter_08_04 - Regular expressions
+* chapter_08\chapter_08_05 - Extension methods
 
-The solution file *learning_charp8.sln* contains all these projects together. The projects are .NET Core console apps and target .NET Core 3.0.
+The solution file *learning_charp8.sln* contains all these projects together. The projects are .NET Core console apps and target .NET Core 3.1.
 
