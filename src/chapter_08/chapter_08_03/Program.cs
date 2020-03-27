@@ -2,140 +2,167 @@
 
 namespace chapter_08_03
 {
-   class Airplane
+   class Engine
    {
-      public void Fly() { }
+      public string Name { get; }
+      public int Capacity { get; }
+      public double Power { get; }
+
+      public Engine(string name, int capacity, double power)
+      {
+         Name = name;
+         Capacity = capacity;
+         Power = power;
+      }
    }
 
-   class Bike
+   static class EngineExtension
    {
-      public void Ride() { }
-   }
-
-   class Car
-   {
-      public bool HasAutoDrive { get; }
-
-      public void Drive() { }
-      public void AutoDrive() { }
+      public static void Deconstruct(this Engine engine, out string name, out int capacity, out double power)
+      {
+         name = engine.Name;
+         capacity = engine.Capacity;
+         power = engine.Power;
+      }
    }
 
    class Program
    {
+      static (string, int, double) GetEngine()
+      {
+         return ("M270 Turbo", 1600, 75.0);
+      }
+
+      static (string Name, int Capacity, double Power) GetEngine2()
+      {
+         return ("M270 Turbo", 1600, 75.0);
+      }
+
       static void Main(string[] args)
       {
-         bool IsTrue(object value)
          {
-            if (value is null) return false;
-            else if (value is 1) return true;
-            else if (value is true) return true;
-            else if (value is "true") return true;
-            else if (value is "1") return true;
-            return false;
+            var engine = new Tuple<string, int, double>("M270 Turbo", 1600, 75);
+
+            Console.WriteLine($"{engine.Item1} {engine.Item2 / 1000.0}l {engine.Item3}kW");
          }
 
-         void SetInMotion1(object vehicle)
          {
-            if (vehicle is null)
-               throw new ArgumentNullException(
-                     message: "Vehicle must not be null",
-                     paramName: nameof(vehicle));
-            else if (vehicle is Airplane a)
-               a.Fly();
-            else if (vehicle is Bike b)
-               b.Ride();
-            else if (vehicle is Car c)
-               if (c.HasAutoDrive) c.AutoDrive();
-               else c.Drive();
-            else
-            throw new ArgumentException(
-               message: "Unexpected vehicle type",
-               paramName: nameof(vehicle));
+            var engine = Tuple.Create("M270 Turbo", 1600, 75);
          }
 
-         void SetInMotion2(object vehicle)
          {
-            switch (vehicle)
-            {
-               case Airplane a:
-                  a.Fly();
-                  break;
-               case Bike b:
-                  b.Ride();
-                  break;
-               case Car c:
-                  if (c.HasAutoDrive) c.AutoDrive();
-                  else c.Drive();
-                  break;
-               case null:
-                  throw new ArgumentNullException(
-                     message: "Vehicle must not be null",
-                     paramName: nameof(vehicle));
-               default:
-                  throw new ArgumentException(
-                     message: "Unexpected vehicle type",
-                     paramName: nameof(vehicle));
-            }
+            var engine = Tuple.Create(
+                  "M270 DE16 LA R", 1595, 83, 73.7, 180, "gasoline", 2015,
+                  Tuple.Create(75, 90, 115)
+               );
+
+            Console.WriteLine($"{engine.Item1} powers: {engine.Rest}");
          }
 
-         void SetInMotion3(object vehicle)
          {
-            switch (vehicle)
-            {
-               case Airplane a:
-                  a.Fly();
-                  break;
-               case Bike b:
-                  b.Ride();
-                  break;
-               case Car c when c.HasAutoDrive:
-                  c.AutoDrive();
-                  break;
-               case Car c:
-                  c.Drive();
-                  break;
-               case null:
-                  throw new ArgumentNullException(
-                     message: "Vehicle must not be null",
-                     paramName: nameof(vehicle));
-               default:
-                  throw new ArgumentException(
-                     message: "Unexpected vehicle type",
-                     paramName: nameof(vehicle));
-            }
-         }
-         
-         void ExecuteCommand(string command)
-         {
-            switch(command)
-            {
-               case "add":  /* add */ break;
-               case "del":  /* delete */ break;
-               case "exit": /* exit */ break;
-               case var o when (o?.Trim().Length ?? 0) == 0:
-                  /* do nothing */
-                  break;
-               default:
-                  /* invalid command */
-                  break;
-            }
+            var engine = new Tuple<string, int, int, double, int, string, int, Tuple<int, int, int>>(
+               "M270 DE16 LA R", 1595, 83, 73.7, 180, "gasoline", 2015,
+               new Tuple<int, int, int>(75, 90, 115));
+
+            Console.WriteLine($"{engine.Item1} powers: {engine.Rest}");
          }
 
-         Console.WriteLine(IsTrue(null));    // False
-         Console.WriteLine(IsTrue(0));       // False
-         Console.WriteLine(IsTrue(1));       // True
-         Console.WriteLine(IsTrue(true));    // True
-         Console.WriteLine(IsTrue("true"));  // True
-         Console.WriteLine(IsTrue("1"));     // True
-         Console.WriteLine(IsTrue("demo"));  // False
+         {
+            var engine = ("M270 Turbo", 1600, 75.0);
+         }
 
-         SetInMotion1(new Car());
-         SetInMotion2(new Car());
-         SetInMotion3(new Car());
+         {
+            ValueTuple<string, int, double> engine = ("M270 Turbo", 1600, 75.0);
 
-         ExecuteCommand("add");
-         ExecuteCommand("quit");
-         ExecuteCommand(null);
+            Console.WriteLine($"{engine.Item1} {engine.Item2 / 1000.0}l {engine.Item3}kW");
+         }
+
+         {
+            (string, int, double) engine = ("M270 Turbo", 1600, 75.0);
+         }
+
+         {
+            var engine = (Name: "M270 Turbo", Capacity: 1600, Power: 75.0);
+
+            Console.WriteLine($"{engine.Name} {engine.Capacity / 1000.0}l {engine.Power}kW");
+         }
+
+         {
+            (string Name, int Capacity, double Power) engine = ("M270 Turbo", 1600, 75.0);
+            Console.WriteLine($"{engine.Name} {engine.Capacity / 1000.0}l {engine.Power}kW");
+         }
+
+         {
+            (string Name, int Capacity, double Power) engine = (name: "M270 Turbo", cap: 1600, pow: 75.0);
+            Console.WriteLine($"{engine.Name} {engine.Capacity / 1000.0}l {engine.Power}kW");
+         }
+
+         {
+            var name = "M270 Turbo";
+            var capacity = 1600;
+            var engine = (name, capacity, 75);
+
+            Console.WriteLine($"{engine.name} {engine.capacity / 1000.0}l {engine.Item3}kW");
+         }
+
+         {
+            var engine = GetEngine();
+            Console.WriteLine($"{engine.Item1} {engine.Item2 / 1000.0}l {engine.Item3}kW");
+         }
+
+         {
+            var engine = GetEngine2();
+            Console.WriteLine($"{engine.Name} {engine.Capacity / 1000.0}l {engine.Power}kW");
+         }
+
+         {
+            var e1 = ("M270 Turbo", 1600, 75.0);
+            var e2 = (Name: "M270 Turbo", Capacity: 1600, Power: 75.0);
+            Console.WriteLine(e1 == e2);
+         }
+
+         {
+            (int, long) t1 = (1, 2);
+            (long, int) t2 = (1, 2);
+            Console.WriteLine(t1 == t2);
+         }
+
+         {
+            (string name, int capacity, double power) = GetEngine();
+         }
+
+         {
+            (var name, var capacity, var power) = GetEngine();
+         }
+
+         {
+            var (name, capacity, power) = GetEngine();
+         }
+
+         {
+            (var name, var capacity, double power) = GetEngine();
+         }
+
+         {
+            (var name, _, _) = GetEngine();
+         }
+
+         {
+            var engine = ("M270 Turbo", 1600, 75.0);
+            (string name, int capacity, double power) = engine;
+         }
+
+         {
+            var engine = new Engine("M270 Turbo", 1600, 75.0);
+
+            var (Name, Capacity, Power) = engine;
+         }
+
+         {
+            // error
+            // var engine = new Engine("M270 Turbo", 1600, 75.0);
+            // Console.WriteLine(engine == ("M270 Turbo", 1600, 75.0));
+         }
       }
    }
 }
