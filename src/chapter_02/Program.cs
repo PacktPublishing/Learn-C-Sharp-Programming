@@ -344,6 +344,11 @@ spawns multiple lines.";
             // or
             a += 11;
          }
+
+         {
+            bar[] bars = new bar[] { null };
+            int? i = bars[0]?.f?.run();
+         }
       }
    }
 #pragma warning restore CS0219, CS0168
