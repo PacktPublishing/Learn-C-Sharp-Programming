@@ -128,10 +128,10 @@ namespace chapter_10_04
 
             var orders = new List<Order>()
             {
-               new Order() { Id = 1001, Date = new DateTime(2019, 3, 12), CustomerId = customers[0].Id },
-               new Order() { Id = 1002, Date = new DateTime(2019, 4, 23), CustomerId = customers[1].Id },
-               new Order() { Id = 1003, Date = new DateTime(2019, 4, 26), CustomerId = customers[0].Id },
-               new Order() { Id = 1004, Date = new DateTime(2019, 5, 12), CustomerId = customers[0].Id }
+               new Order() { Id = 1001, Date = new DateTime(2020, 3, 12), CustomerId = customers[0].Id },
+               new Order() { Id = 1002, Date = new DateTime(2020, 4, 23), CustomerId = customers[1].Id },
+               new Order() { Id = 1003, Date = new DateTime(2020, 4, 26), CustomerId = customers[0].Id },
+               new Order() { Id = 1004, Date = new DateTime(2020, 5, 12), CustomerId = customers[0].Id }
             };
 
             var orderlines = new List<OrderLine>()
@@ -161,7 +161,7 @@ namespace chapter_10_04
                               o => o.Line.ArticleId,
                               a => a.Id,
                               (o, a) => new { o.Order, o.Line, o.Customer, Article = a})
-                        .Where(o => o.Order.Date >= new DateTime(2019, 4, 1) &&
+                        .Where(o => o.Order.Date >= new DateTime(2020, 4, 1) &&
                                     o.Customer.FirstName == "John")
                         .OrderBy(o => o.Article.Name)                        
                         .Select(o => o.Article.Name);
@@ -174,7 +174,7 @@ namespace chapter_10_04
                            join ol in orderlines on o.Id equals ol.OrderId
                            join c in customers on o.CustomerId equals c.Id
                            join a in articles on ol.ArticleId equals a.Id
-                           where o.Date >= new DateTime(2019, 4, 1) &&
+                           where o.Date >= new DateTime(2020, 4, 1) &&
                                  c.FirstName == "John"
                            orderby a.Name
                            select a.Name;
