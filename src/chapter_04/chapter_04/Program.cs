@@ -1,4 +1,5 @@
-﻿using System;
+﻿using chapter_04.demo;
+using System;
 
 namespace chapter_04
 {
@@ -235,6 +236,14 @@ namespace chapter_04
             Enum.TryParse("Normal", out v3.Priority p1);
             Enum.TryParse(typeof(v3.Priority), "normal", true, out object o);
             v3.Priority p2 = (v3.Priority)o;
+         }
+
+         {            
+            var f = new foo2();
+         }
+
+         {
+            global::System.Console.WriteLine("Hello, world!");
          }
       } 
 
