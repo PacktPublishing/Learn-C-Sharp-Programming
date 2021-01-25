@@ -18,7 +18,7 @@
          return new Complex()
          {
             Real = number1.Real + number2.Real,
-            Imaginary = number2.Imaginary + number2.Imaginary
+            Imaginary = number1.Imaginary + number2.Imaginary
          };
       }
 
@@ -27,20 +27,20 @@
          return new Complex()
          {
             Real = number1.Real - number2.Real,
-            Imaginary = number2.Imaginary - number2.Imaginary
+            Imaginary = number1.Imaginary - number2.Imaginary
          };
       }
 
       public static bool operator ==(Complex number1, Complex number2)
       {
          return number1.Real.Equals(number2.Real) &&
-                number2.Imaginary.Equals(number2.Imaginary);
+                number1.Imaginary.Equals(number2.Imaginary);
       }
 
       public static bool operator !=(Complex number1, Complex number2)
       {
          return !number1.Real.Equals(number2.Real) ||
-                !number2.Imaginary.Equals(number2.Imaginary);
+                !number1.Imaginary.Equals(number2.Imaginary);
       }
 
       public override bool Equals(object obj)
