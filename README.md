@@ -1,4 +1,4 @@
-# Learning C# 8
+# Learn C# Programming
 
 By [Marius Bancila](https://github.com/mariusbancila), [Ankit Sharma](https://github.com/AnkitSharma-007), [Raffaele Rialdi](https://github.com/raffaeler)
 
