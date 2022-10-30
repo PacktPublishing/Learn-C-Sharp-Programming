@@ -82,7 +82,11 @@ namespace chapter_12_03_WPF
             var sw = new Stopwatch();
             sw.Start();
             Debug.WriteLine($"GetImageAsync 1 TID: {Thread.CurrentThread.ManagedThreadId}");
+
             using var client = new HttpClient();
+            // The UserAgent is now required from picsum.photos host
+            client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("Learning_CSharp", "8"));
+
             using var response = await client.GetAsync(uri).ConfigureAwait(false);
             Debug.WriteLine($"GetImageAsync 2 TID: {Thread.CurrentThread.ManagedThreadId}");
             response.EnsureSuccessStatusCode();
